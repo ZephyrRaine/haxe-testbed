@@ -36,11 +36,18 @@ class SamplePlayer extends Entity {
 		ca = App.ME.controller.createAccess();
 		ca.lockCondition = Game.isGameControllerLocked;
 
-		// Placeholder display
-		var b = new h2d.Bitmap( h2d.Tile.fromColor(Green, iwid, ihei), spr );
-		b.tile.setCenterRatio(0.5,1);
+		// Player
+		spr.set(Assets.hero);
+		spr.setCenterRatio(0.4, 1.0);
+
+		spr.anim.registerStateAnim("walk", 5, 1.0, ()->walkSpeed!=0.0);
+		spr.anim.registerStateAnim("idle", 0, 1.0);
+		//spr.anim.registerTransitions(["idle"],["walk"],"idleWalk", 0.5);
 	}
 
+	public inline function isMoving() {
+		return isAlive() && ( M.fabs(dxTotal)>=0.03 || M.fabs(dyTotal)>=0.03 );
+	}
 
 	override function dispose() {
 		super.dispose();
