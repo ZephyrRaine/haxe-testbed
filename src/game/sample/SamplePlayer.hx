@@ -128,5 +128,7 @@ class SamplePlayer extends Entity {
 		// Apply requested walk movement
 		if( walkSpeed!=0 )
 			v.dx += walkSpeed * 0.045; // some arbitrary speed
+
+		set_dir(Std.int(walkSpeed));
 	}
 }
