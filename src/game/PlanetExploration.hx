@@ -1,6 +1,8 @@
+import PlanetState.TILE_TYPE;
 import sample.SampleGame;
 import h2d.Bitmap;
 import h2d.Tile;
+import ui.PlanetInspectorWindow;
 
 enum TILE_STATUS
 {
@@ -9,7 +11,7 @@ enum TILE_STATUS
         FOUILLED;
 }
 
-class PlanetExplorationMap extends Entity{
+class PlanetExploration extends Entity{
 	var ca : ControllerAccess<GameAction>;
 
     var playerEntity : Entity;
@@ -18,6 +20,7 @@ class PlanetExplorationMap extends Entity{
     var tile_statuses : Array<Array<TILE_STATUS>>; 
     var mapTiles : Array<Array<Entity>>;
 
+    var planetInspector : PlanetInspectorWindow;
     public function new(state:PlanetState)
     {
         planetState = state;
@@ -48,7 +51,9 @@ class PlanetExplorationMap extends Entity{
         playerEntity = new Entity(state.startPosX,state.startPosY);
         playerEntity.spr.set(AssetsDictionaries.tiles.map_player);
 
-        
+        planetInspector = new PlanetInspectorWindow();
+
+        planetInspector.updateTile(TILE_TYPE.SHIP, REVEALED);
     }
 
     override function preUpdate() 
@@ -81,7 +86,7 @@ class PlanetExplorationMap extends Entity{
 
     function tryMove(ncx:Int, ncy:Int):Bool
     {
-        var canMove : Bool = ncx>=0&&ncx<planetState.planetSize&&ncy>=0&&ncy<planetState.planetSize&&(ncx!=playerEntity.cx||ncy!=playerEntity.cy);
+        var canMove : Bool = isInBounds(ncx,ncy)&&(ncx!=playerEntity.cx||ncy!=playerEntity.cy);
         if(!canMove)
             return false;
 
@@ -91,11 +96,16 @@ class PlanetExplorationMap extends Entity{
             revealTile(ncx,ncy);
         }
 
+        planetInspector.updateTile(planetState.getTileType(ncx,ncy), REVEALED);
+
         return true;
     }
 
     function revealTile(cx:Int,cy:Int)
     {
+        if(!isInBounds(cx,cy))
+            return;
+
         //GET MAP CASE ENUM AND DISPLAY ACCORDINGLY 
         var caseType = planetState.getTileType(cx,cy);
 
@@ -120,8 +130,15 @@ class PlanetExplorationMap extends Entity{
         tile_statuses[cx][cy] = FOUILLED;
         mapTiles[cx][cy].spr.set('map_fouilled_$caseType');
         planetState.digCase(cx,cy);
+        planetInspector.updateTile(caseType, FOUILLED);
+
 
         return true;
+    }
+
+    inline function isInBounds(cx:Int,cy:Int):Bool
+    {
+            return cx>=0&&cx<planetState.planetSize&&cy>=0&&cy<planetState.planetSize;
     }
 
 }

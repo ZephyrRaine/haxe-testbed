@@ -1,7 +1,5 @@
 package sample;
 
-import PlanetExploration.PlanetExplorationMap;
-
 /**
 	This small class just creates a SamplePlayer instance in current level
 **/
@@ -67,7 +65,7 @@ class SampleGame extends Game {
 		trace("salut");
 
 		var state = new PlanetState(5);
-		new PlanetExplorationMap(state);
+		new PlanetExploration(state);
 	}
 
 	public function addGold(value : Int)
