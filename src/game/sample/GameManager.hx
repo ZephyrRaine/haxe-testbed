@@ -7,14 +7,15 @@ import ui.Window;
 	This small class just creates a SamplePlayer instance in current level
 **/
 class GameManager extends Game {
-	public var maxAP:Int = 10;
+	public var maxAP:Int = 13;
 	public var gold:Int = 0;
 	public var villageHUD:Window;
 	var variablesText : h2d.Text;
 
 	public var scopeLevel = 0;
-	public var extractorLevel = 0; public var maxExtractorLevel = 5;
-	public var radar = false;
+	public var extractorLevel = 0;
+	public var radarLevel = 0;
+	public var analyzerLevel = 0;
 
 	public function new() {
 		super();

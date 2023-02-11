@@ -6,6 +6,7 @@ class PlanetInspectorWindow extends Window
     var title:h2d.Text;
     var description:h2d.Text;
     var action:h2d.Text;
+    var analyzer:h2d.Text;
 
 	var variablesText : h2d.Text;
 
@@ -34,6 +35,13 @@ class PlanetInspectorWindow extends Window
         action.textColor = Col.black();
         action.text = "Space - Dig (1AP)";
 
+        var f = new h2d.Flow(win);
+		f.padding = 2;
+
+        analyzer = new h2d.Text(Assets.fontPixelMono, f);
+        analyzer.textColor = Col.green();
+        analyzer.text = '';
+
         variablesText = new h2d.Text(Assets.fontPixel, root);
 		variablesText.filter = new dn.heaps.filter.PixelOutline();
 		updateHUD(0,0);
@@ -41,14 +49,15 @@ class PlanetInspectorWindow extends Window
     }
 
     public function updateHUD(gold:Int, AP:Int)
-        {
-            variablesText.text = 'g:$gold - ap:$AP';
-        }
+    {
+        variablesText.text = 'g:$gold - ap:$AP';
+    }
     
 
     public function updateTile(t:PlanetState.TILE_TYPE, status:PlanetExploration.TILE_STATUS)
     {
         action.text = status==PlanetExploration.TILE_STATUS.REVEALED?"Space - Dig (1AP)":"Nothing left to do here";
+        // TODO: analyzer.text = "Golds: 70% [10~30] | AP: 30 % [-1]";
         switch(t)
         {
             case VIDE:

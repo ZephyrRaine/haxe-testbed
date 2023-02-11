@@ -96,7 +96,7 @@ class PlanetExploration extends Entity{
             for(x in 0...planetState.planetSize)
             {
                 var e = new Entity(x,y);
-                if(gm.radar && planetState.getTileType(x,y) != VIDE)
+                if(gm.radarLevel == 1 && planetState.getTileType(x,y) != VIDE)
                     e.spr.set(AssetsDictionaries.tiles.map_hidden_spotted);
                 else
                     e.spr.set(AssetsDictionaries.tiles.map_hidden);
@@ -255,7 +255,7 @@ class PlanetExploration extends Entity{
         var m = new Menu();
 
         if(lost)
-            Gold = Std.int(Gold * (gm.extractorLevel / (gm.maxExtractorLevel * 2)));
+            Gold = Std.int(Gold * (gm.extractorLevel * 0.1));
 
         gm.addPermanentGold(Gold);
 

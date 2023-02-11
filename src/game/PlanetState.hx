@@ -27,7 +27,8 @@ class PlanetState
 
     public function new(_planetSize:Int)
     {
-        Init(_planetSize);
+        Init(_planetSize, cast(Game.ME, GameManager).maxAP);
+
         GenerateBasicPoints();
         GenerateInterestPoints();
     }
@@ -71,7 +72,7 @@ class PlanetState
         return log;
     }
 
-    private function Init(_planetSize : Int)
+    private function Init(_planetSize : Int, maxAP : Int)
     {
         rand = new Rand(0);
         rand.initSeed(Std.random(999999));
@@ -92,7 +93,7 @@ class PlanetState
             interestPoints.push(new InterestPoint(0, 0, 0, 0, 0, 0, 0, 0));
             interestPoints.push(new InterestPoint(100, 1, planetSize - 1, 70, 10, 30, 30, -1));
             interestPoints.push(new InterestPoint(25, planetSize - 2, planetSize - 1, 80, 100, 300, 20, -2));
-            interestPoints.push(new InterestPoint(50, planetSize - 2, planetSize - 1, 0, 0, 0, 100, 5));
+            interestPoints.push(new InterestPoint(50, planetSize - 2, planetSize - 1, 0, 0, 0, 100, maxAP));
             interestPoints.push(new InterestPoint(50, 1, planetSize - 1, 100, 50, 100, 0, 0));
             interestPoints.push(new InterestPoint(50, 1, 1, 100, 30, 50, 0, 0));
             interestPoints.push(new InterestPoint(25, 1, planetSize - 1, 50, 10, 100, 0, 0));
@@ -167,5 +168,10 @@ private class InterestPoint
         this.maxEarn = maxEarn;
         this.chancePA = chancePA;
         this.numPA = numPA;
+    }
+
+    public function GetAnalyzerInfos(analyzerLevel : Int)
+    {
+        //ToDo
     }
 }
