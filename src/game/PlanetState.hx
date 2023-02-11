@@ -1,4 +1,4 @@
-import sample.SampleGame;
+import sample.GameManager;
 import dn.Rand;
 
 enum abstract TILE_TYPE(Int) from Int to Int

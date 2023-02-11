@@ -1,5 +1,5 @@
 import PlanetState.TILE_TYPE;
-import sample.SampleGame;
+import sample.GameManager;
 import h2d.Bitmap;
 import h2d.Tile;
 import ui.PlanetInspectorWindow;
@@ -20,6 +20,7 @@ class PlanetExploration extends Entity{
 
 	function get_Gold() return _gold;
 	function set_Gold(v) {
+     if(v <= 0) v = 0;
 	  _gold = v;
 	  planetInspector.updateHUD(Gold,AP);
 	  return _gold;
@@ -28,7 +29,13 @@ class PlanetExploration extends Entity{
 	public var AP(get,set):Int;
 	function get_AP() return _ap;
 	function set_AP(v) {
-		_ap = v;
+        if(v <= 0)
+        {
+            v = 0;
+            triggerEndRun(true);
+        } 
+        if(v > gm.maxAP)
+    		_ap = v;
 		planetInspector.updateHUD(Gold,AP);
 		return _ap;
 	}
@@ -44,14 +51,11 @@ class PlanetExploration extends Entity{
 
     var planetInspector : PlanetInspectorWindow;
 
+    var gm : GameManager;
+
     public function addGold(value : Int)
     {
         Gold += value;
-    }
-
-    public function removeGold(value : Int)
-    {
-        Gold -= value;
     }
 
     public function addAP(value : Int)
@@ -59,22 +63,21 @@ class PlanetExploration extends Entity{
         AP += value;
     }
 
-    public function removeAP(value : Int)
-    {
-        AP -= value;
-    }
 
 
     public function new(state:PlanetState)
     {
         super(0,0);
 
+        gm = cast(Game.ME, GameManager);
         planetState = state;
 		ME = this;
 
 
         hei = planetState.planetSize*16;
         wid = planetState.planetSize*16;
+
+        AP = gm.maxAP;
 
 		// Camera tracks this
 		camera.trackEntity(this, true);
@@ -172,7 +175,8 @@ class PlanetExploration extends Entity{
 
         if(caseType == PlanetState.TILE_TYPE.SHIP)
         {
-            cast(Game.ME, SampleGame).switchToVillage();
+            triggerEndRun(false);
+            // gm.switchToVillage();
             return false;
         }
 
@@ -194,5 +198,10 @@ class PlanetExploration extends Entity{
 		super.dispose();
         planetInspector.destroy();
 	}
+
+    function triggerEndRun(lost:Bool)
+    {
+        
+    }
 
 }

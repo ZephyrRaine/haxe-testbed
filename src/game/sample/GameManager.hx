@@ -3,9 +3,8 @@ package sample;
 /**
 	This small class just creates a SamplePlayer instance in current level
 **/
-class SampleGame extends Game {
-
-	
+class GameManager extends Game {
+	public var maxAP:Int = 10;
 
 	public function new() {
 		super();

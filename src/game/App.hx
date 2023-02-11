@@ -2,6 +2,8 @@
 	"App" class takes care of all the top-level stuff in the whole application. Any other Process, including Game instance, should be a child of App.
 **/
 
+import sample.GameManager;
+
 class App extends dn.Process {
 	public static var ME : App;
 
@@ -117,7 +119,7 @@ class App extends dn.Process {
 
 	final function _createGameInstance() {
 		// new Game(); // <---- Uncomment this to start an empty Game instance
-		new sample.SampleGame(); // <---- Uncomment this to start the Sample Game instance
+		new GameManager(); // <---- Uncomment this to start the Sample Game instance
 	}
 
 
