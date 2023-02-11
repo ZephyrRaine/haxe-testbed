@@ -1,5 +1,7 @@
 package sample;
 
+import h2d.Bitmap;
+
 /**
 	SamplePlayer is an Entity with some extra functionalities:
 	- falls with gravity
@@ -11,6 +13,8 @@ package sample;
 class SamplePlayer extends Entity {
 	var ca : ControllerAccess<GameAction>;
 	var walkSpeed = 0.;
+
+    var interactTooltip : Bitmap;
 
 	// This is TRUE if the player is not falling
 	var onGround(get,never) : Bool;
@@ -42,6 +46,11 @@ class SamplePlayer extends Entity {
 
 		spr.anim.registerStateAnim("walk", 5, 1.0, ()->walkSpeed!=0.0);
 		spr.anim.registerStateAnim("idle", 0, 1.0);
+
+		interactTooltip = new h2d.Bitmap(Assets.tiles.getTile("UI_X_Button"),spr);
+        interactTooltip.tile.setCenterRatio(0.5,0.5);
+        interactTooltip.y = -(hei+30);
+        interactTooltip.visible = false;
 		//spr.anim.registerTransitions(["idle"],["walk"],"idleWalk", 0.5);
 	}
 
@@ -115,6 +124,8 @@ class SamplePlayer extends Entity {
 			// As mentioned above, we don't touch physics values (eg. `dx`) here. We just store some "requested walk speed", which will be applied to actual physics in fixedUpdate.
 			walkSpeed = ca.getAnalogValue2(MoveLeft,MoveRight); // -1 to 1
 		}
+
+		checkBuildings();
 	}
 
 
@@ -130,5 +141,36 @@ class SamplePlayer extends Entity {
 			v.dx += walkSpeed * 0.045; // some arbitrary speed
 
 		set_dir(Std.int(walkSpeed));
+
+		
+	}
+
+	function checkBuildings()
+	{
+		var currentBuilding = null;
+		for(b in en.Building.ALL)
+			{
+				if(distPx(b) <= b.largeRadius)
+				{
+					currentBuilding = b;
+				}
+			}
+
+		if(currentBuilding != null)
+		{
+			interactTooltip.visible = true;
+			hud.debug(currentBuilding.name);
+			if(ca.isPressed(MenuOk))
+			{
+				interactTooltip.visible = false;
+				currentBuilding.displayPopUp();
+			}
+		}
+		else
+		{
+			interactTooltip.visible = false;
+			hud.debug("");
+		}
+
 	}
 }
