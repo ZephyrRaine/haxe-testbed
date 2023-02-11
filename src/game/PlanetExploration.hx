@@ -91,9 +91,9 @@ class PlanetExploration extends Entity{
 
         tile_statuses = [for (x in 0...planetState.planetSize) [for (y in 0...planetState.planetSize) HIDDEN]]; 
         mapTiles = [for (x in 0...planetState.planetSize) [for (y in 0...planetState.planetSize) null]];
-        for(y in 0...5)
+        for(y in 0...planetState.planetSize)
         {
-            for(x in 0...5)
+            for(x in 0...planetState.planetSize)
             {
                 var e = new Entity(x,y);
                 e.spr.set(AssetsDictionaries.tiles.map_hidden);
@@ -111,9 +111,9 @@ class PlanetExploration extends Entity{
 
         Console.ME.add("reveal", ()->
         {
-            for(y in 0...5)
+            for(y in 0...planetState.planetSize)
                 {
-                    for(x in 0...5)
+                    for(x in 0...planetState.planetSize)
                     {
                         revealTile(x,y);
                     }

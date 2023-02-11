@@ -11,7 +11,7 @@
 	"iid": "de07ff90-7820-11ed-ac6b-bbc68d89d940",
 	"jsonVersion": "1.2.5",
 	"appBuildId": 464870,
-	"nextUid": 223,
+	"nextUid": 225,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "LinearHorizontal",
@@ -504,6 +504,70 @@
 					"allowedRefs": "OnlySame",
 					"allowedRefTags": [],
 					"tilesetUid": null
+				},
+				{
+					"identifier": "Cost",
+					"doc": null,
+					"__type": "Array<Int>",
+					"uid": 223,
+					"type": "F_Int",
+					"isArray": true,
+					"canBeNull": false,
+					"arrayMinLength": 1,
+					"arrayMaxLength": 5,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefTags": [],
+					"tilesetUid": null
+				},
+				{
+					"identifier": "Description",
+					"doc": null,
+					"__type": "String",
+					"uid": 224,
+					"type": "F_Text",
+					"isArray": false,
+					"canBeNull": true,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefTags": [],
+					"tilesetUid": null
 				}
 			]
 		}
@@ -593,7 +657,7 @@
 						},
 						{
 							"__identifier": "Building",
-							"__grid": [29,30],
+							"__grid": [28,30],
 							"__pivot": [0.5,1],
 							"__tags": [],
 							"__tile": { "tilesetUid": 4, "x": 112, "y": 48, "w": 112, "h": 32 },
@@ -602,21 +666,26 @@
 							"width": 112,
 							"height": 32,
 							"defUid": 215,
-							"px": [472,496],
+							"px": [456,496],
 							"fieldInstances": [
 								{ "__identifier": "Tile", "__value": { "tilesetUid": 4, "x": 112, "y": 48, "w": 112, "h": 32 }, "__type": "Tile", "__tile": { "tilesetUid": 4, "x": 112, "y": 48, "w": 112, "h": 32 }, "defUid": 220, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["112,48,112,32"]
 								}] },
-								{ "__identifier": "Name", "__value": "Shop", "__type": "String", "__tile": null, "defUid": 221, "realEditorValues": [{
+								{ "__identifier": "Name", "__value": "Extractor", "__type": "String", "__tile": null, "defUid": 221, "realEditorValues": [{
 									"id": "V_String",
-									"params": ["Shop"]
+									"params": ["Extractor"]
+								}] },
+								{ "__identifier": "Cost", "__value": [100], "__type": "Array<Int>", "__tile": null, "defUid": 223, "realEditorValues": [{ "id": "V_Int", "params": [100] }] },
+								{ "__identifier": "Description", "__value": "Le extracteur\nSalut", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Le extracteur\\nSalut"]
 								}] }
 							]
 						},
 						{
 							"__identifier": "Building",
-							"__grid": [17,30],
+							"__grid": [16,30],
 							"__pivot": [0.5,1],
 							"__tags": [],
 							"__tile": { "tilesetUid": 4, "x": 240, "y": 48, "w": 48, "h": 32 },
@@ -625,21 +694,32 @@
 							"width": 48,
 							"height": 32,
 							"defUid": 215,
-							"px": [280,496],
+							"px": [264,496],
 							"fieldInstances": [
 								{ "__identifier": "Tile", "__value": { "tilesetUid": 4, "x": 240, "y": 48, "w": 48, "h": 32 }, "__type": "Tile", "__tile": { "tilesetUid": 4, "x": 240, "y": 48, "w": 48, "h": 32 }, "defUid": 220, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["240,48,48,32"]
 								}] },
-								{ "__identifier": "Name", "__value": "Tavern", "__type": "String", "__tile": null, "defUid": 221, "realEditorValues": [{
+								{ "__identifier": "Name", "__value": "PA", "__type": "String", "__tile": null, "defUid": 221, "realEditorValues": [{
 									"id": "V_String",
-									"params": ["Tavern"]
+									"params": ["PA"]
+								}] },
+								{ "__identifier": "Cost", "__value": [50,100,200,500,1000], "__type": "Array<Int>", "__tile": null, "defUid": 223, "realEditorValues": [
+									{ "id": "V_Int", "params": [50] },
+									{ "id": "V_Int", "params": [100] },
+									{ "id": "V_Int", "params": [200] },
+									{ "id": "V_Int", "params": [500] },
+									{ "id": "V_Int", "params": [1000] }
+								] },
+								{ "__identifier": "Description", "__value": "Bâtiment des PA", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Bâtiment des PA"]
 								}] }
 							]
 						},
 						{
 							"__identifier": "Building",
-							"__grid": [22,30],
+							"__grid": [21,30],
 							"__pivot": [0.5,1],
 							"__tags": [],
 							"__tile": { "tilesetUid": 4, "x": 80, "y": 96, "w": 64, "h": 32 },
@@ -648,7 +728,7 @@
 							"width": 80,
 							"height": 32,
 							"defUid": 215,
-							"px": [360,496],
+							"px": [344,496],
 							"fieldInstances": [
 								{ "__identifier": "Tile", "__value": { "tilesetUid": 4, "x": 80, "y": 96, "w": 64, "h": 32 }, "__type": "Tile", "__tile": { "tilesetUid": 4, "x": 80, "y": 96, "w": 64, "h": 32 }, "defUid": 220, "realEditorValues": [{
 									"id": "V_String",
@@ -657,7 +737,9 @@
 								{ "__identifier": "Name", "__value": "Plastacier", "__type": "String", "__tile": null, "defUid": 221, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["Plastacier"]
-								}] }
+								}] },
+								{ "__identifier": "Cost", "__value": [75], "__type": "Array<Int>", "__tile": null, "defUid": 223, "realEditorValues": [{ "id": "V_Int", "params": [75] }] },
+								{ "__identifier": "Description", "__value": null, "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [] }
 							]
 						},
 						{
@@ -680,6 +762,64 @@
 								{ "__identifier": "Name", "__value": "Ship", "__type": "String", "__tile": null, "defUid": 221, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["Ship"]
+								}] },
+								{ "__identifier": "Cost", "__value": [0], "__type": "Array<Int>", "__tile": null, "defUid": 223, "realEditorValues": [{ "id": "V_Int", "params": [0] }] },
+								{ "__identifier": "Description", "__value": null, "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [] }
+							]
+						},
+						{
+							"__identifier": "Building",
+							"__grid": [34,30],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 240, "y": 112, "w": 48, "h": 32 },
+							"__smartColor": "#BE4A2F",
+							"iid": "864dd1c0-9f30-11ed-8967-ade0ff07b5fd",
+							"width": 48,
+							"height": 32,
+							"defUid": 215,
+							"px": [552,496],
+							"fieldInstances": [
+								{ "__identifier": "Tile", "__value": { "tilesetUid": 4, "x": 240, "y": 112, "w": 48, "h": 32 }, "__type": "Tile", "__tile": { "tilesetUid": 4, "x": 240, "y": 112, "w": 48, "h": 32 }, "defUid": 220, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["240,112,48,32"]
+								}] },
+								{ "__identifier": "Name", "__value": "Analyzer", "__type": "String", "__tile": null, "defUid": 221, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Analyzer"]
+								}] },
+								{ "__identifier": "Cost", "__value": [0], "__type": "Array<Int>", "__tile": null, "defUid": 223, "realEditorValues": [null] },
+								{ "__identifier": "Description", "__value": "Le plus cher des batiments", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Le plus cher des batiments"]
+								}] }
+							]
+						},
+						{
+							"__identifier": "Building",
+							"__grid": [40,30],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 464, "y": 208, "w": 128, "h": 48 },
+							"__smartColor": "#BE4A2F",
+							"iid": "a853fe70-9f30-11ed-8967-e9bcfc4c505f",
+							"width": 128,
+							"height": 48,
+							"defUid": 215,
+							"px": [648,496],
+							"fieldInstances": [
+								{ "__identifier": "Tile", "__value": { "tilesetUid": 4, "x": 464, "y": 208, "w": 128, "h": 48 }, "__type": "Tile", "__tile": { "tilesetUid": 4, "x": 464, "y": 208, "w": 128, "h": 48 }, "defUid": 220, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["464,208,128,48"]
+								}] },
+								{ "__identifier": "Name", "__value": "Radar", "__type": "String", "__tile": null, "defUid": 221, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Radar"]
+								}] },
+								{ "__identifier": "Cost", "__value": [250], "__type": "Array<Int>", "__tile": null, "defUid": 223, "realEditorValues": [{ "id": "V_Int", "params": [250] }] },
+								{ "__identifier": "Description", "__value": "Le bâtiment des Radars", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Le bâtiment des Radars"]
 								}] }
 							]
 						}

@@ -1,15 +1,21 @@
 package sample;
 
+import ui.Window;
+
+
 /**
 	This small class just creates a SamplePlayer instance in current level
 **/
 class GameManager extends Game {
 	public var maxAP:Int = 10;
 	public var gold:Int = 0;
+	public var villageHUD:Window;
+	var variablesText : h2d.Text;
+
 	public function new() {
 		super();
 
-		switchToExploration();
+		//switchToExploration();
 		Console.ME.add("exploration",switchToExploration);
 	}
 
@@ -29,8 +35,20 @@ class GameManager extends Game {
 		}
 		
 		new SamplePlayer();
+
+		villageHUD = new ui.Window();
 		
+        variablesText = new h2d.Text(Assets.fontPixel, root);
+		variablesText.filter = new dn.heaps.filter.PixelOutline();
+		updateHUD(0,0);
 	}
+
+	
+    public function updateHUD(gold:Int, AP:Int)
+    {
+        variablesText.text = 'g:$gold - ap:$AP';
+    }
+    
 
 	public function switchToExploration()
 	{
@@ -46,7 +64,7 @@ class GameManager extends Game {
 	{
 		trace("salut");
 
-		var state = new PlanetState(5);
+		var state = new PlanetState(15);
 		new PlanetExploration(state);
 	}
 
