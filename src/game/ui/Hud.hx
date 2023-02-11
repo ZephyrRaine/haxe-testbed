@@ -1,5 +1,6 @@
 package ui;
 
+
 class Hud extends GameChildProcess {
 	var flow : h2d.Flow;
 	var invalidated = true;
@@ -7,6 +8,8 @@ class Hud extends GameChildProcess {
 	var notifTw : dn.Tweenie;
 
 	var debugText : h2d.Text;
+
+	var variablesText : h2d.Text;
 
 	public function new() {
 		super();
@@ -22,11 +25,20 @@ class Hud extends GameChildProcess {
 		debugText = new h2d.Text(Assets.fontPixel, root);
 		debugText.filter = new dn.heaps.filter.PixelOutline();
 		clearDebug();
+
+		variablesText = new h2d.Text(Assets.fontPixel, root);
+		variablesText.filter = new dn.heaps.filter.PixelOutline();
+		updateHUD(0,0);
 	}
 
 	override function onResize() {
 		super.onResize();
 		root.setScale(Const.UI_SCALE);
+	}
+
+	public function updateHUD(gold:Int, AP:Int)
+	{
+		variablesText.text = 'g:$gold - ap:$AP';
 	}
 
 	/** Clear debug printing **/

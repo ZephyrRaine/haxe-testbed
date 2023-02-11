@@ -7,15 +7,30 @@ import PlanetExploration.PlanetExplorationMap;
 **/
 class SampleGame extends Game {
 
-	var gold : Int = 0;
-	var AP : Int = 0;
+	var _gold : Int;
+	var _ap : Int;
+	public var Gold(get, set):Int;
+
+	function get_Gold() return _gold;
+	function set_Gold(v) {
+	  _gold = v;
+	  hud.updateHUD(Gold,AP);
+	  return _gold;
+	}
+
+	public var AP(get,set):Int;
+	function get_AP() return _ap;
+	function set_AP(v) {
+		_ap = v;
+		hud.updateHUD(Gold,AP);
+		return _ap;
+	}
 
 
 	public function new() {
 		super();
 
 		Console.ME.add("switchExploration",switchToExploration);
-
 	}
 
 	override function startLevel(l:World_Level) {
@@ -42,6 +57,11 @@ class SampleGame extends Game {
 		startLevel(Assets.worldData.all_levels.PlanetExplorationLevel);
 	}
 
+	public function switchToVillage()
+	{
+		startLevel(Assets.worldData.all_levels.FirstLevel);
+	}
+
 	function initExploration()
 	{
 		trace("salut");
@@ -52,12 +72,12 @@ class SampleGame extends Game {
 
 	public function addGold(value : Int)
 	{
-		gold += value;
+		Gold += value;
 	}
 
 	public function removeGold(value : Int)
 	{
-		gold -= value;
+		Gold -= value;
 	}
 
 	public function addAP(value : Int)
