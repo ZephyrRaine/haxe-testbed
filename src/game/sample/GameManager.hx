@@ -5,11 +5,12 @@ package sample;
 **/
 class GameManager extends Game {
 	public var maxAP:Int = 10;
-
+	public var gold:Int = 0;
 	public function new() {
 		super();
 
-		Console.ME.add("switchExploration",switchToExploration);
+		switchToExploration();
+		Console.ME.add("exploration",switchToExploration);
 	}
 
 	override function startLevel(l:World_Level) {
@@ -49,6 +50,8 @@ class GameManager extends Game {
 		new PlanetExploration(state);
 	}
 
-	
+	public function addPermanentGold(_gold:Int) {
+		gold += _gold;
+	}
 }
 

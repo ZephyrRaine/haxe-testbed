@@ -1,5 +1,6 @@
 package en;
 
+import sample.GameManager;
 import h2d.Bitmap;
 import ui.BuildingPopUp;
 import h2d.Tile;
@@ -20,10 +21,7 @@ class Building extends Entity {
         set_wid(b.width);
         set_hei(b.height);
         name = b.f_Name;
-        var bitmap = new h2d.Bitmap(b.getTile(), spr);
-        bitmap.tile.setCenterRatio(0.5,1);
-        
-
+        spr.useCustomTile(b.getTile());
     }
 
     override function dispose() {
@@ -32,11 +30,20 @@ class Building extends Entity {
 	}
 
 	public function displayPopUp() {
-        new BuildingPopUp(name, ()->{
-            hud.notify("Clicked yes");
-        }, 
+        new BuildingPopUp(name, getYesAction(), 
         ()->{
             hud.notify("Clicked no");
         });
+    }
+
+    public function getYesAction() : Void->Void
+    {
+        switch(name)
+        {
+            case "Ship":
+                return ()->{cast(Game.ME, GameManager).switchToExploration();};
+        }
+
+        return ()->hud.notify("Clicked yes");
     }
 }

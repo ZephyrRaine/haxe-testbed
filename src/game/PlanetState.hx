@@ -37,7 +37,7 @@ class PlanetState
     public function digCase(cx:Int, cy:Int)
     {
         PlanetExploration.ME.addGold(interestPoints[planetGrid[cx][cy]].GetRandomEarn(rand));
-        PlanetExploration.ME.removeAP(-interestPoints[planetGrid[cx][cy]].GetRandomAP(rand));
+        PlanetExploration.ME.addAP(interestPoints[planetGrid[cx][cy]].GetRandomAP(rand));
     }
 
     private function Init(_planetSize : Int)

@@ -1,3 +1,4 @@
+import ui.win.Menu;
 import PlanetState.TILE_TYPE;
 import sample.GameManager;
 import h2d.Bitmap;
@@ -21,6 +22,7 @@ class PlanetExploration extends Entity{
 	function get_Gold() return _gold;
 	function set_Gold(v) {
      if(v <= 0) v = 0;
+
 	  _gold = v;
 	  planetInspector.updateHUD(Gold,AP);
 	  return _gold;
@@ -29,13 +31,15 @@ class PlanetExploration extends Entity{
 	public var AP(get,set):Int;
 	function get_AP() return _ap;
 	function set_AP(v) {
-        if(v <= 0)
+        if(v < 0)
         {
             v = 0;
             triggerEndRun(true);
         } 
         if(v > gm.maxAP)
-    		_ap = v;
+    		v = gm.maxAP;
+
+        _ap = v;
 		planetInspector.updateHUD(Gold,AP);
 		return _ap;
 	}
@@ -63,11 +67,10 @@ class PlanetExploration extends Entity{
         AP += value;
     }
 
-
-
     public function new(state:PlanetState)
     {
         super(0,0);
+        planetInspector = new PlanetInspectorWindow();
 
         gm = cast(Game.ME, GameManager);
         planetState = state;
@@ -103,17 +106,18 @@ class PlanetExploration extends Entity{
         playerEntity = new Entity(state.startPosX,state.startPosY);
         playerEntity.spr.set(AssetsDictionaries.tiles.map_player);
 
-        planetInspector = new PlanetInspectorWindow();
 
         planetInspector.updateTile(TILE_TYPE.SHIP, REVEALED);
     }
 
+    var wantedX:Int = 0;
+    var wantedY:Int = 0;
+
     override function preUpdate() 
     {
         super.preUpdate();
-        
-        var wantedX:Int = 0;
-        var wantedY:Int = 0;
+        wantedX = 0;
+        wantedY = 0;
 
         if(ca.isPressed(MoveUp))
             wantedY = -1;
@@ -129,10 +133,13 @@ class PlanetExploration extends Entity{
             // playerEntity.setPosCase(playerEntity.cx+1, playerEntity.cy);
         else if(ca.isPressed(Jump))
             tryDigTile(playerEntity.cx, playerEntity.cy);
+    }
 
+    override function postUpdate()
+    {
         if((wantedX != 0 || wantedY != 0) && tryMove(playerEntity.cx+wantedX, playerEntity.cy+wantedY))
         {
-
+    
         }
     }
 
@@ -143,6 +150,7 @@ class PlanetExploration extends Entity{
             return false;
 
         playerEntity.setPosCase(ncx,ncy);
+        AP--;
         if(tile_statuses[ncx][ncy] == HIDDEN)
         {
             revealTile(ncx,ncy);
@@ -176,14 +184,16 @@ class PlanetExploration extends Entity{
         if(caseType == PlanetState.TILE_TYPE.SHIP)
         {
             triggerEndRun(false);
-            // gm.switchToVillage();
             return false;
         }
 
-        tile_statuses[cx][cy] = FOUILLED;
-        mapTiles[cx][cy].spr.set('map_fouilled_$caseType');
+        AP--;
+        new Bar(100,16,Col.red());
         planetState.digCase(cx,cy);
-        planetInspector.updateTile(caseType, FOUILLED);
+        rewardModal(()->{
+            tile_statuses[cx][cy] = FOUILLED;
+            mapTiles[cx][cy].spr.set('map_fouilled_$caseType');
+            planetInspector.updateTile(caseType, FOUILLED);});
 
         return true;
     }
@@ -201,7 +211,24 @@ class PlanetExploration extends Entity{
 
     function triggerEndRun(lost:Bool)
     {
-        
+        var m = new Menu();
+
+        if(lost)
+            Gold = 0;
+
+        gm.addPermanentGold(Gold);
+
+        m.addTitle("You're coming home");
+        m.addTitle('With $Gold gold');
+        m.addButton("Ok", gm.switchToVillage,true);
+    }
+
+    function rewardModal(cb:()->Void)
+    {
+        var m = new Menu();
+
+        m.addTitle("You've found something!");
+        m.addButton("Ok", cb,true);
     }
 
 }
