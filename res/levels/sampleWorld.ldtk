@@ -11,7 +11,7 @@
 	"iid": "de07ff90-7820-11ed-ac6b-bbc68d89d940",
 	"jsonVersion": "1.2.5",
 	"appBuildId": 464870,
-	"nextUid": 216,
+	"nextUid": 222,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "LinearHorizontal",
@@ -421,26 +421,91 @@
 			"doc": null,
 			"width": 112,
 			"height": 32,
-			"resizableX": false,
-			"resizableY": false,
+			"resizableX": true,
+			"resizableY": true,
 			"keepAspectRatio": false,
 			"tileOpacity": 1,
-			"fillOpacity": 0.08,
-			"lineOpacity": 0,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
 			"hollow": false,
 			"color": "#BE4A2F",
-			"renderMode": "Tile",
+			"renderMode": "Rectangle",
 			"showName": true,
-			"tilesetId": 4,
+			"tilesetId": null,
 			"tileRenderMode": "FitInside",
-			"tileRect": { "tilesetUid": 4, "x": 112, "y": 48, "w": 112, "h": 32 },
+			"tileRect": null,
 			"nineSliceBorders": [],
 			"maxCount": 0,
 			"limitScope": "PerLevel",
 			"limitBehavior": "MoveLastOne",
 			"pivotX": 0.5,
 			"pivotY": 1,
-			"fieldDefs": []
+			"fieldDefs": [
+				{
+					"identifier": "Tile",
+					"doc": null,
+					"__type": "Tile",
+					"uid": 220,
+					"type": "F_Tile",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "EntityTile",
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorAlwaysShow": true,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefTags": [],
+					"tilesetUid": 4
+				},
+				{
+					"identifier": "Name",
+					"doc": null,
+					"__type": "String",
+					"uid": 221,
+					"type": "F_String",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefTags": [],
+					"tilesetUid": null
+				}
+			]
 		}
 	], "tilesets": [
 		{
@@ -513,20 +578,6 @@
 					"gridTiles": [],
 					"entityInstances": [
 						{
-							"__identifier": "Building",
-							"__grid": [10,30],
-							"__pivot": [0.5,1],
-							"__tags": [],
-							"__tile": { "tilesetUid": 4, "x": 112, "y": 48, "w": 112, "h": 32 },
-							"__smartColor": "#BE4A2F",
-							"iid": "e4c5a910-9f30-11ed-8967-97b70cf987de",
-							"width": 112,
-							"height": 32,
-							"defUid": 215,
-							"px": [168,496],
-							"fieldInstances": []
-						},
-						{
 							"__identifier": "PlayerStart",
 							"__grid": [5,30],
 							"__pivot": [0.5,1],
@@ -539,6 +590,75 @@
 							"defUid": 21,
 							"px": [88,496],
 							"fieldInstances": []
+						},
+						{
+							"__identifier": "Building",
+							"__grid": [11,30],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 112, "y": 48, "w": 112, "h": 32 },
+							"__smartColor": "#BE4A2F",
+							"iid": "71435b40-9f30-11ed-8967-6b08691a7e5c",
+							"width": 112,
+							"height": 32,
+							"defUid": 215,
+							"px": [184,496],
+							"fieldInstances": [
+								{ "__identifier": "Tile", "__value": { "tilesetUid": 4, "x": 112, "y": 48, "w": 112, "h": 32 }, "__type": "Tile", "__tile": { "tilesetUid": 4, "x": 112, "y": 48, "w": 112, "h": 32 }, "defUid": 220, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["112,48,112,32"]
+								}] },
+								{ "__identifier": "Name", "__value": "Shop", "__type": "String", "__tile": null, "defUid": 221, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Shop"]
+								}] }
+							]
+						},
+						{
+							"__identifier": "Building",
+							"__grid": [17,30],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 240, "y": 48, "w": 48, "h": 32 },
+							"__smartColor": "#BE4A2F",
+							"iid": "77eb7540-9f30-11ed-8967-398f8070b605",
+							"width": 48,
+							"height": 32,
+							"defUid": 215,
+							"px": [280,496],
+							"fieldInstances": [
+								{ "__identifier": "Tile", "__value": { "tilesetUid": 4, "x": 240, "y": 48, "w": 48, "h": 32 }, "__type": "Tile", "__tile": { "tilesetUid": 4, "x": 240, "y": 48, "w": 48, "h": 32 }, "defUid": 220, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["240,48,48,32"]
+								}] },
+								{ "__identifier": "Name", "__value": "Tavern", "__type": "String", "__tile": null, "defUid": 221, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Tavern"]
+								}] }
+							]
+						},
+						{
+							"__identifier": "Building",
+							"__grid": [22,30],
+							"__pivot": [0.5,1],
+							"__tags": [],
+							"__tile": { "tilesetUid": 4, "x": 80, "y": 96, "w": 64, "h": 32 },
+							"__smartColor": "#BE4A2F",
+							"iid": "7cc265d0-9f30-11ed-8967-df3bbfc42eb1",
+							"width": 80,
+							"height": 32,
+							"defUid": 215,
+							"px": [360,496],
+							"fieldInstances": [
+								{ "__identifier": "Tile", "__value": { "tilesetUid": 4, "x": 80, "y": 96, "w": 64, "h": 32 }, "__type": "Tile", "__tile": { "tilesetUid": 4, "x": 80, "y": 96, "w": 64, "h": 32 }, "defUid": 220, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["80,96,64,32"]
+								}] },
+								{ "__identifier": "Name", "__value": "Plastacier", "__type": "String", "__tile": null, "defUid": 221, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Plastacier"]
+								}] }
+							]
 						}
 					]
 				},
@@ -590,12 +710,12 @@
 						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,
 						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,
+						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,
 						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -743,7 +863,14 @@
 						{ "px": [688,496], "src": [32,0], "f": 0, "t": 2, "d": [209,1438] },
 						{ "px": [704,496], "src": [32,0], "f": 0, "t": 2, "d": [209,1439] },
 						{ "px": [96,432], "src": [416,80], "f": 0, "t": 231, "d": [204,1221] },
-						{ "px": [112,432], "src": [432,80], "f": 0, "t": 232, "d": [203,1222] },
+						{ "px": [112,432], "src": [416,80], "f": 0, "t": 231, "d": [204,1222] },
+						{ "px": [224,368], "src": [432,80], "f": 0, "t": 232, "d": [203,1049] },
+						{ "px": [288,384], "src": [432,80], "f": 0, "t": 232, "d": [203,1098] },
+						{ "px": [176,400], "src": [432,80], "f": 0, "t": 232, "d": [203,1136] },
+						{ "px": [128,432], "src": [432,80], "f": 0, "t": 232, "d": [203,1223] },
+						{ "px": [208,368], "src": [400,80], "f": 0, "t": 230, "d": [202,1048] },
+						{ "px": [272,384], "src": [400,80], "f": 0, "t": 230, "d": [202,1097] },
+						{ "px": [160,400], "src": [400,80], "f": 0, "t": 230, "d": [202,1135] },
 						{ "px": [80,432], "src": [400,80], "f": 0, "t": 230, "d": [202,1220] }
 					],
 					"seed": 6928790,
