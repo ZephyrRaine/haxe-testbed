@@ -42,21 +42,33 @@ class PlanetState
         PlanetExploration.ME.addGold(goldEarn);
         PlanetExploration.ME.addAP(apEarn);
         
+        var log : String;
         switch(planetGrid[cx][cy])
         {
-            // case VIDE:
-            //     return
-            // case SHIP:
+            case VIDE:
+                log = goldEarn > 0 ? 'You find buried trinkets worth $goldEarn golds.' : 'You find nothing.';
+            case SHIP:
+                log = '';
+
+            case CREVASSE:
+                log = goldEarn > 0 ? 'The exploration is successful!\nYou come back with minerals worth $goldEarn golds.' : 'This crack was empty.';
+                log += apEarn < 0 ? '\nAnd it took you a long time: $apEarn AP.' : '';
+            case WRECK:
+                log = goldEarn > 0 ? 'Jackpot!\nYou find the equivalent of $goldEarn golds in valuable objects!' : 'Sadly, there is nothing of value left.';
+                log += apEarn < 0 ? '\nUnfortunately, this wreck was a real labyrinth: $apEarn APs.' : '';
+            case VILLAGE:
+                log = apEarn > 0 ? 'You meet inhabitants who welcome you nicely.\nYou recover all your APs.' : 'The inhabitants of this planet are hostile, you flee.';
+            case ORE:
+                log = goldEarn > 0 ? 'Woaw! You have extracted ores for a total of $goldEarn golds!' : 'They are mere pebbles of no value.';
+            case PLANT:
+                log = goldEarn > 0 ? 'Nice catch.\nYou carefully harvest this rare plant, it is worth $goldEarn golds.' : 'Just weeds, leave them here.';
+            case CORPSE:
+                log = goldEarn > 0 ? 'This old corpse had $goldEarn gold coins in his pockets.\n"They would have been useless to him anyway."' : 'There are only bones left.';
                 
-            // case CREVASSE:
-            // case WRECK:
-            // case VILLAGE:
-            // case ORE:
-            // case PLANT:
-            // case CORPSE:
-                case _:
-                    return 'You earn $goldEarn golds and $apEarn AP.';
+            case _:
+                log = 'You earn $goldEarn golds and $apEarn AP.';
         }
+        return log;
     }
 
     private function Init(_planetSize : Int)
