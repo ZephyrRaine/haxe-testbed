@@ -34,10 +34,11 @@ class PlanetState
         
     public inline function getTileType(cx:Int,cy:Int) : TILE_TYPE return planetGrid[cx][cy];
 
-    public function digCase(cx:Int, cy:Int)
+    public function digCase(cx:Int, cy:Int) : String
     {
         PlanetExploration.ME.addGold(interestPoints[planetGrid[cx][cy]].GetRandomEarn(rand));
         PlanetExploration.ME.addAP(interestPoints[planetGrid[cx][cy]].GetRandomAP(rand));
+        return "";
     }
 
     private function Init(_planetSize : Int)

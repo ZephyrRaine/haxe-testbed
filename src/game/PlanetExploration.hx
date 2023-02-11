@@ -189,8 +189,8 @@ class PlanetExploration extends Entity{
 
         AP--;
         new Bar(100,16,Col.red());
-        planetState.digCase(cx,cy);
-        rewardModal(()->{
+        var str = planetState.digCase(cx,cy);
+        rewardModal(str, ()->{
             tile_statuses[cx][cy] = FOUILLED;
             mapTiles[cx][cy].spr.set('map_fouilled_$caseType');
             planetInspector.updateTile(caseType, FOUILLED);});
@@ -223,11 +223,11 @@ class PlanetExploration extends Entity{
         m.addButton("Ok", gm.switchToVillage,true);
     }
 
-    function rewardModal(cb:()->Void)
+    function rewardModal(str:String, cb:()->Void)
     {
         var m = new Menu();
 
-        m.addTitle("You've found something!");
+        m.addTitle(str);
         m.addButton("Ok", cb,true);
     }
 
