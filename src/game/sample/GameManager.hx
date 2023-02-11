@@ -64,7 +64,7 @@ class GameManager extends Game {
 	{
 		trace("salut");
 
-		var state = new PlanetState(15);
+		var state = new PlanetState(5);
 		new PlanetExploration(state);
 	}
 

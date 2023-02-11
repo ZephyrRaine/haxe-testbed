@@ -36,9 +36,27 @@ class PlanetState
 
     public function digCase(cx:Int, cy:Int) : String
     {
-        PlanetExploration.ME.addGold(interestPoints[planetGrid[cx][cy]].GetRandomEarn(rand));
-        PlanetExploration.ME.addAP(interestPoints[planetGrid[cx][cy]].GetRandomAP(rand));
-        return "";
+        var goldEarn = interestPoints[planetGrid[cx][cy]].GetRandomEarn(rand);
+        var apEarn = interestPoints[planetGrid[cx][cy]].GetRandomAP(rand);
+        
+        PlanetExploration.ME.addGold(goldEarn);
+        PlanetExploration.ME.addAP(apEarn);
+        
+        switch(planetGrid[cx][cy])
+        {
+            // case VIDE:
+            //     return
+            // case SHIP:
+                
+            // case CREVASSE:
+            // case WRECK:
+            // case VILLAGE:
+            // case ORE:
+            // case PLANT:
+            // case CORPSE:
+                case _:
+                    return 'You earn $goldEarn golds and $apEarn AP.';
+        }
     }
 
     private function Init(_planetSize : Int)
@@ -63,7 +81,7 @@ class PlanetState
             interestPoints.push(new InterestPoint(100, 1, planetSize - 1, 70, 10, 30, 30, -1));
             interestPoints.push(new InterestPoint(25, planetSize - 2, planetSize - 1, 80, 100, 300, 20, -2));
             interestPoints.push(new InterestPoint(50, planetSize - 2, planetSize - 1, 0, 0, 0, 100, 5));
-            interestPoints.push(new InterestPoint(50, 1, planetSize - 1, 50, 100, 0, 0, 0));
+            interestPoints.push(new InterestPoint(50, 1, planetSize - 1, 100, 50, 100, 0, 0));
             interestPoints.push(new InterestPoint(50, 1, 1, 100, 30, 50, 0, 0));
             interestPoints.push(new InterestPoint(25, 1, planetSize - 1, 50, 10, 100, 0, 0));
         }
@@ -79,57 +97,32 @@ class PlanetState
         {
             if(interestPoints[i].DoAppear(rand))
             {
-                var xDirection : Int = startPosX;
-                var yDirection : Int = startPosY;
-
                 var distance : Int = interestPoints[i].GetRandomDistance(rand);
-                while(distance > 0)
+                
+                var xPos = new Array<Int>();
+                var yPos = new Array<Int>();
+                for(y in 0...planetSize)
                 {
-                    if(rand.irange(0, 1) == 1) //Horizontal Move
+                    for(x in 0...planetSize)
                     {
-                        if(xDirection == startPosX)
+                        if(distance == Math.abs(x - startPosX) + Math.abs(y - startPosY))
                         {
-                            xDirection += rand.irange(0,1)*2-1;
-                        }
-                        else
-                        {
-                            if(!TryMoveOnDirection(xDirection))
-                                TryMoveOnDirection(yDirection);
+                            if(planetGrid[x][y] == 0)
+                            {
+                                xPos.push(x);
+                                yPos.push(y);
+                            }
                         }
                     }
-                    else //Vertical Move
-                    {
-                        if(yDirection == startPosY)
-                        {
-                            yDirection += rand.irange(0,1)*2-1;
-                        }
-                        else
-                        {
-                            if(!TryMoveOnDirection(yDirection))
-                                TryMoveOnDirection(xDirection);
-                        }
-                    }
-
-                    distance--;
                 }
-
-                planetGrid[xDirection][yDirection] = i;
+                
+                if(xPos.length > 0)
+                {
+                    var randomTile = rand.irange(0, xPos.length);
+    
+                    planetGrid[xPos[randomTile]][yPos[randomTile]] = i;
+                }
             }
-        }
-    }
-
-    private function TryMoveOnDirection(_direction : Int) : Bool
-    {
-        var directionTarget = _direction + (_direction > 0 ? 1 : -1);
-
-        if(directionTarget >= 0 && directionTarget < planetSize)
-        {
-            _direction = directionTarget;
-            return true;
-        }
-        else
-        {
-            return false;
         }
     }
 }
