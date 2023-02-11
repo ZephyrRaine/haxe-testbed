@@ -101,7 +101,7 @@ class PlanetExploration extends Entity{
             }
         }
 
-        revealTile(state.startPosX,state.startPosY);
+        revealTiles(state.startPosX, state.startPosY, gm.scopeLevel);
         
         playerEntity = new Entity(state.startPosX,state.startPosY);
         playerEntity.spr.set(AssetsDictionaries.tiles.map_player);
@@ -162,14 +162,41 @@ class PlanetExploration extends Entity{
 
         playerEntity.setPosCase(ncx,ncy);
         AP--;
-        if(tile_statuses[ncx][ncy] == HIDDEN)
-        {
-            revealTile(ncx,ncy);
-        }
+        revealTiles(ncx, ncy, gm.scopeLevel);
 
         planetInspector.updateTile(planetState.getTileType(ncx,ncy), REVEALED);
 
         return true;
+    }
+
+    function revealTiles(ncx:Int, ncy:Int, scopeLevel:Int)
+    {
+        if(scopeLevel <= 0)
+        {
+            if(isInBounds(ncx, ncy))
+                revealTile(ncx, ncy);
+        }
+        else
+        {
+            var iScopeLevel = Math.ceil(scopeLevel / 2.0);
+            for(y in (ncy - iScopeLevel)...(ncy + iScopeLevel + 1))
+            {
+                for(x in (ncx - iScopeLevel)...(ncx + iScopeLevel + 1))
+                {
+                    if(!isInBounds(x, y))
+                        continue;
+                    
+                    if(scopeLevel % 2 == 0 || // If even, use "Chebyshev"
+                        Math.abs(x - ncx) + Math.abs(y - ncy) <= iScopeLevel) // If odd, use "Manhattan"
+                    {
+                        if(tile_statuses[x][y] == HIDDEN)
+                        {
+                            revealTile(x, y);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     function revealTile(cx:Int,cy:Int)

@@ -12,6 +12,8 @@ class GameManager extends Game {
 	public var villageHUD:Window;
 	var variablesText : h2d.Text;
 
+	public var scopeLevel = 0;
+
 	public function new() {
 		super();
 
