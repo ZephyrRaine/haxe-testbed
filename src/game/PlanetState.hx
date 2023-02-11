@@ -37,6 +37,7 @@ class PlanetState
     public function digCase(cx:Int, cy:Int)
     {
         PlanetExploration.ME.addGold(interestPoints[planetGrid[cx][cy]].GetRandomEarn(rand));
+        PlanetExploration.ME.removeAP(-interestPoints[planetGrid[cx][cy]].GetRandomAP(rand));
     }
 
     private function Init(_planetSize : Int)
@@ -58,9 +59,9 @@ class PlanetState
         {
             interestPoints.push(new InterestPoint(0, 0, 0, 30, 10, 30, 0, 0));
             interestPoints.push(new InterestPoint(0, 0, 0, 0, 0, 0, 0, 0));
-            interestPoints.push(new InterestPoint(100, 1, planetSize - 1, 70, 10, 30, 30, 1));
-            interestPoints.push(new InterestPoint(25, planetSize - 2, planetSize - 1, 80, 100, 300, 20, 2));
-            interestPoints.push(new InterestPoint(50, planetSize - 2, planetSize - 1, 0, 0, 0, 0, 0));
+            interestPoints.push(new InterestPoint(100, 1, planetSize - 1, 70, 10, 30, 30, -1));
+            interestPoints.push(new InterestPoint(25, planetSize - 2, planetSize - 1, 80, 100, 300, 20, -2));
+            interestPoints.push(new InterestPoint(50, planetSize - 2, planetSize - 1, 0, 0, 0, 100, 5));
             interestPoints.push(new InterestPoint(50, 1, planetSize - 1, 50, 100, 0, 0, 0));
             interestPoints.push(new InterestPoint(50, 1, 1, 100, 30, 50, 0, 0));
             interestPoints.push(new InterestPoint(25, 1, planetSize - 1, 50, 10, 100, 0, 0));
@@ -141,15 +142,16 @@ private class InterestPoint
     private var distanceMax : Int;
     public inline function GetRandomDistance(r : Rand) return r.irange(distanceMin, distanceMax);
 
-    public var chanceEarn : Float;
+    private var chanceEarn : Float;
     private var minEarn : Int;
     private var maxEarn : Int;
     public inline function GetRandomEarn(r : Rand) return r.irange(0, 100) <= chanceEarn ? r.irange(minEarn, maxEarn) : 0; 
 
-    public var chanceLostPA : Float;
-    public var losePA : Int;
+    private var chancePA : Float;
+    private var numPA : Int;
+    public inline function GetRandomAP(r : Rand) return r.irange(0, 100) <= chancePA ? numPA : 0; 
 
-    public function new(chanceAppear : Int, distanceMin : Int, distanceMax : Int, chanceEarn : Float, minEarn : Int, maxEarn : Int, chanceLostPA : Float, losePA : Int)
+    public function new(chanceAppear : Int, distanceMin : Int, distanceMax : Int, chanceEarn : Float, minEarn : Int, maxEarn : Int, chancePA : Float, numPA : Int)
     {
         this.chanceAppear = chanceAppear;
         this.distanceMin = distanceMin;
@@ -157,7 +159,7 @@ private class InterestPoint
         this.chanceEarn = chanceEarn;
         this.minEarn = minEarn;
         this.maxEarn = maxEarn;
-        this.chanceLostPA = chanceLostPA;
-        this.losePA = losePA;
+        this.chancePA = chancePA;
+        this.numPA = numPA;
     }
 }
