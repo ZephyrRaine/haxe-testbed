@@ -255,7 +255,7 @@ class PlanetExploration extends Entity{
         var m = new Menu();
 
         if(lost)
-            Gold = 0;
+            Gold = Std.int(Gold * (gm.extractorLevel / (gm.maxExtractorLevel * 2)));
 
         gm.addPermanentGold(Gold);
 

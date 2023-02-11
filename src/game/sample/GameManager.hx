@@ -13,6 +13,7 @@ class GameManager extends Game {
 	var variablesText : h2d.Text;
 
 	public var scopeLevel = 0;
+	public var extractorLevel = 0; public var maxExtractorLevel = 5;
 	public var radar = false;
 
 	public function new() {
