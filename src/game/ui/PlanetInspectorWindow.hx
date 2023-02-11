@@ -37,7 +37,7 @@ class PlanetInspectorWindow extends Window
         variablesText = new h2d.Text(Assets.fontPixel, root);
 		variablesText.filter = new dn.heaps.filter.PixelOutline();
 		updateHUD(0,0);
-        
+
     }
 
     public function updateHUD(gold:Int, AP:Int)

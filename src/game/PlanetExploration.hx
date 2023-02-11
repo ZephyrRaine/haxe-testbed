@@ -108,6 +108,17 @@ class PlanetExploration extends Entity{
 
 
         planetInspector.updateTile(TILE_TYPE.SHIP, REVEALED);
+
+        Console.ME.add("reveal", ()->
+        {
+            for(y in 0...5)
+                {
+                    for(x in 0...5)
+                    {
+                        revealTile(x,y);
+                    }
+                }
+        });
     }
 
     var wantedX:Int = 0;
