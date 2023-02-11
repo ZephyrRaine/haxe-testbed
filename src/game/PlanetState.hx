@@ -1,8 +1,7 @@
-import PlanetExploration.TILE_STATUS;
 import sample.SampleGame;
 import dn.Rand;
 
-enum abstract TILE_TYPE(Int) from Int
+enum abstract TILE_TYPE(Int) from Int to Int
 {
     var VIDE;
     var SHIP; //player entry point
@@ -37,7 +36,7 @@ class PlanetState
 
     public function digCase(cx:Int, cy:Int)
     {
-        cast(Game.ME, SampleGame).addGold(10);
+        cast(Game.ME, SampleGame).addGold(interestPoints[planetGrid[cx][cy]].GetRandomEarn(rand));
     }
 
     private function Init(_planetSize : Int)
@@ -45,11 +44,20 @@ class PlanetState
         rand = new Rand(0);
         rand.initSeed(Std.random(999999));
 
-        planetSize = _planetSize;
+        planetSize = _planetSize < 5 ? 5 : _planetSize;
+        if(planetSize % 2 == 0)
+        {
+            planetSize += 1;
+        }
         planetGrid = [for (x in 0...planetSize) [for (y in 0...planetSize) TILE_TYPE.VIDE]];
+
+        startPosX = Std.int(planetSize / 2);
+        startPosY = startPosX;
 
         interestPoints = new Array<InterestPoint>();
         {
+            interestPoints.push(new InterestPoint(0, 0, 0, 30, 10, 30, 0, 0));
+            interestPoints.push(new InterestPoint(0, 0, 0, 0, 0, 0, 0, 0));
             interestPoints.push(new InterestPoint(100, 1, planetSize - 1, 70, 10, 30, 30, 1));
             interestPoints.push(new InterestPoint(25, planetSize - 2, planetSize - 1, 80, 100, 300, 20, 2));
             interestPoints.push(new InterestPoint(50, planetSize - 2, planetSize - 1, 0, 0, 0, 0, 0));
@@ -61,7 +69,7 @@ class PlanetState
 
     private function GenerateBasicPoints()
     {
-        planetGrid[2][2] = TILE_TYPE.SHIP;
+        planetGrid[startPosX][startPosY] = TILE_TYPE.SHIP;
     }
     private function GenerateInterestPoints()
     {
@@ -69,15 +77,15 @@ class PlanetState
         {
             if(interestPoints[i].DoAppear(rand))
             {
-                var xDirection : Int = 2;
-                var yDirection : Int = 2;
+                var xDirection : Int = startPosX;
+                var yDirection : Int = startPosY;
 
                 var distance : Int = interestPoints[i].GetRandomDistance(rand);
                 while(distance > 0)
                 {
                     if(rand.irange(0, 1) == 1) //Horizontal Move
                     {
-                        if(xDirection == 2)
+                        if(xDirection == startPosX)
                         {
                             xDirection += rand.irange(0,1)*2-1;
                         }
@@ -89,7 +97,7 @@ class PlanetState
                     }
                     else //Vertical Move
                     {
-                        if(yDirection == 2)
+                        if(yDirection == startPosY)
                         {
                             yDirection += rand.irange(0,1)*2-1;
                         }
@@ -103,7 +111,7 @@ class PlanetState
                     distance--;
                 }
 
-                planetGrid[xDirection][yDirection] = i + 2;
+                planetGrid[xDirection][yDirection] = i;
             }
         }
     }
@@ -136,7 +144,7 @@ private class InterestPoint
     public var chanceEarn : Float;
     private var minEarn : Int;
     private var maxEarn : Int;
-    public inline function GetRandomEarn(r : Rand) return r.irange(minEarn, maxEarn); 
+    public inline function GetRandomEarn(r : Rand) return r.irange(0, 100) <= chanceEarn ? r.irange(minEarn, maxEarn) : 0; 
 
     public var chanceLostPA : Float;
     public var losePA : Int;
