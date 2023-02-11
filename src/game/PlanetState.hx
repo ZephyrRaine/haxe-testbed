@@ -29,6 +29,7 @@ class PlanetState
     public function new(_planetSize:Int)
     {
         Init(_planetSize);
+        GenerateBasicPoints();
         GenerateInterestPoints();
     }
         
@@ -56,6 +57,11 @@ class PlanetState
             interestPoints.push(new InterestPoint(50, 1, 1, 100, 30, 50, 0, 0));
             interestPoints.push(new InterestPoint(25, 1, planetSize - 1, 50, 10, 100, 0, 0));
         }
+    }
+
+    private function GenerateBasicPoints()
+    {
+        planetGrid[2][2] = TILE_TYPE.SHIP;
     }
     private function GenerateInterestPoints()
     {
@@ -97,7 +103,7 @@ class PlanetState
                     distance--;
                 }
 
-                planetGrid[xDirection][yDirection] = i + 1;
+                planetGrid[xDirection][yDirection] = i + 2;
             }
         }
     }
