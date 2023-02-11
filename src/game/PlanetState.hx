@@ -36,7 +36,7 @@ class PlanetState
 
     public function digCase(cx:Int, cy:Int)
     {
-        cast(Game.ME, SampleGame).addGold(interestPoints[planetGrid[cx][cy]].GetRandomEarn(rand));
+        PlanetExploration.ME.addGold(interestPoints[planetGrid[cx][cy]].GetRandomEarn(rand));
     }
 
     private function Init(_planetSize : Int)

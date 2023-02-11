@@ -12,6 +12,28 @@ enum TILE_STATUS
 }
 
 class PlanetExploration extends Entity{
+	public static var ME : PlanetExploration;
+
+    var _gold : Int;
+	var _ap : Int;
+	public var Gold(get, set):Int;
+
+	function get_Gold() return _gold;
+	function set_Gold(v) {
+	  _gold = v;
+	  planetInspector.updateHUD(Gold,AP);
+	  return _gold;
+	}
+
+	public var AP(get,set):Int;
+	function get_AP() return _ap;
+	function set_AP(v) {
+		_ap = v;
+		planetInspector.updateHUD(Gold,AP);
+		return _ap;
+	}
+
+
 	var ca : ControllerAccess<GameAction>;
 
     var playerEntity : Entity;
@@ -21,11 +43,38 @@ class PlanetExploration extends Entity{
     var mapTiles : Array<Array<Entity>>;
 
     var planetInspector : PlanetInspectorWindow;
+
+    public function addGold(value : Int)
+    {
+        Gold += value;
+    }
+
+    public function removeGold(value : Int)
+    {
+        Gold -= value;
+    }
+
+    public function addAP(value : Int)
+    {
+        AP += value;
+    }
+
+    public function removeAP(value : Int)
+    {
+        AP -= value;
+    }
+
+
     public function new(state:PlanetState)
     {
-        planetState = state;
-
         super(0,0);
+
+        planetState = state;
+		ME = this;
+
+
+        hei = planetState.planetSize*16;
+        wid = planetState.planetSize*16;
 
 		// Camera tracks this
 		camera.trackEntity(this, true);
@@ -132,13 +181,18 @@ class PlanetExploration extends Entity{
         planetState.digCase(cx,cy);
         planetInspector.updateTile(caseType, FOUILLED);
 
-
         return true;
     }
 
     inline function isInBounds(cx:Int,cy:Int):Bool
     {
-            return cx>=0&&cx<planetState.planetSize&&cy>=0&&cy<planetState.planetSize;
+        return cx>=0&&cx<planetState.planetSize&&cy>=0&&cy<planetState.planetSize;
     }
+
+    
+    override function dispose() {
+		super.dispose();
+        planetInspector.destroy();
+	}
 
 }

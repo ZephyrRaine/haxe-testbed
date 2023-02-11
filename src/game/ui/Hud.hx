@@ -9,7 +9,6 @@ class Hud extends GameChildProcess {
 
 	var debugText : h2d.Text;
 
-	var variablesText : h2d.Text;
 
 	public function new() {
 		super();
@@ -26,9 +25,6 @@ class Hud extends GameChildProcess {
 		debugText.filter = new dn.heaps.filter.PixelOutline();
 		clearDebug();
 
-		variablesText = new h2d.Text(Assets.fontPixel, root);
-		variablesText.filter = new dn.heaps.filter.PixelOutline();
-		updateHUD(0,0);
 	}
 
 	override function onResize() {
@@ -36,10 +32,6 @@ class Hud extends GameChildProcess {
 		root.setScale(Const.UI_SCALE);
 	}
 
-	public function updateHUD(gold:Int, AP:Int)
-	{
-		variablesText.text = 'g:$gold - ap:$AP';
-	}
 
 	/** Clear debug printing **/
 	public inline function clearDebug() {

@@ -6,6 +6,9 @@ class PlanetInspectorWindow extends Window
     var title:h2d.Text;
     var description:h2d.Text;
     var action:h2d.Text;
+
+	var variablesText : h2d.Text;
+
     public override function new() {
         super(null);
 
@@ -30,8 +33,18 @@ class PlanetInspectorWindow extends Window
         action = new h2d.Text(Assets.fontPixelMono, f);
         action.textColor = Col.black();
         action.text = "Space - Dig (1AP)";
+
+        variablesText = new h2d.Text(Assets.fontPixel, root);
+		variablesText.filter = new dn.heaps.filter.PixelOutline();
+		updateHUD(0,0);
         
     }
+
+    public function updateHUD(gold:Int, AP:Int)
+        {
+            variablesText.text = 'g:$gold - ap:$AP';
+        }
+    
 
     public function updateTile(t:PlanetState.TILE_TYPE, status:PlanetExploration.TILE_STATUS)
     {
