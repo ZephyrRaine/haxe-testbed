@@ -960,26 +960,32 @@
 							]
 						},
 						{
-							"__identifier": "Ship",
+							"__identifier": "Building",
 							"__grid": [44,15],
 							"__pivot": [0.5,1],
 							"__tags": [],
 							"__tile": { "tilesetUid": 4, "x": 624, "y": 64, "w": 32, "h": 64 },
-							"__smartColor": "#D77643",
-							"iid": "8c8f4370-9f30-11ed-8967-efea847193b9",
+							"__smartColor": "#BE4A2F",
+							"iid": "b25df1c0-9f30-11ed-90fc-65ab2240f165",
 							"width": 32,
 							"height": 64,
-							"defUid": 229,
+							"defUid": 215,
 							"px": [712,256],
 							"fieldInstances": [
-								{ "__identifier": "DisplayName", "__value": "Ship", "__type": "String", "__tile": null, "defUid": 230, "realEditorValues": [{
+								{ "__identifier": "Tile", "__value": { "tilesetUid": 4, "x": 624, "y": 64, "w": 32, "h": 64 }, "__type": "Tile", "__tile": { "tilesetUid": 4, "x": 624, "y": 64, "w": 32, "h": 64 }, "defUid": 220, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["624,64,32,64"]
+								}] },
+								{ "__identifier": "DisplayName", "__value": "Ship", "__type": "String", "__tile": null, "defUid": 221, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["Ship"]
 								}] },
-								{ "__identifier": "Description", "__value": "Launch a new expedition.", "__type": "String", "__tile": null, "defUid": 231, "realEditorValues": [{
+								{ "__identifier": "Cost", "__value": [0], "__type": "Array<Int>", "__tile": null, "defUid": 223, "realEditorValues": [null] },
+								{ "__identifier": "Description", "__value": "Start a new expedition", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
 									"id": "V_String",
-									"params": ["Launch a new expedition."]
-								}] }
+									"params": ["Start a new expedition"]
+								}] },
+								{ "__identifier": "BUILDING_TYPE", "__value": "", "__type": "String", "__tile": null, "defUid": 228, "realEditorValues": [] }
 							]
 						}
 					]

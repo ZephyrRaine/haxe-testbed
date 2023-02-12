@@ -1,5 +1,6 @@
 package en;
 
+import ui.ShipPopUp;
 import sample.GameManager;
 import h2d.Bitmap;
 import ui.BuildingPopUp;
@@ -77,7 +78,13 @@ class Building extends Entity {
 		ALL.remove(this);
 	}
 
-	public function displayPopUp() {
+	public function displayPopUp() 
+    {
+        if(display_name == "Ship")
+        {
+            new ShipPopUp(display_name, description, cast(Game.ME, GameManager).switchToExploration);
+            return;
+        }
 
         var nextCost = building_level >= building_costs.length ? -1 : building_costs[building_level];
         var currentGold = cast(game, GameManager).Gold;
@@ -86,7 +93,7 @@ class Building extends Entity {
     }
 
     public function getDisplayName() : String {
-        return display_name + " - lvl. " + building_level;
+        return display_name == "Ship" ? "Ship" : display_name + " - lvl. " + building_level;
     }
 
     public function upgrade()
