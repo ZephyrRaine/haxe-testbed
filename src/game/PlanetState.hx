@@ -130,14 +130,96 @@ class PlanetState
 
         interestPoints = new Array<InterestPoint>();
         {
-            interestPoints.push(new InterestPoint(0, 0, 0, 30, 10, 30, 0, 0));
-            interestPoints.push(new InterestPoint(0, 0, 0, 0, 0, 0, 0, 0));
-            interestPoints.push(new InterestPoint(100, 1, planetSize - 1, 70, 10, 30, 30, -1));
-            interestPoints.push(new InterestPoint(25, planetSize - 2, planetSize - 1, 80, 100, 300, 20, -2));
-            interestPoints.push(new InterestPoint(50, planetSize - 2, planetSize - 1, 0, 0, 0, 100, maxAP));
-            interestPoints.push(new InterestPoint(50, 1, planetSize - 1, 100, 50, 100, 0, 0));
-            interestPoints.push(new InterestPoint(50, 1, 1, 100, 30, 50, 0, 0));
-            interestPoints.push(new InterestPoint(25, 1, planetSize - 1, 50, 10, 100, 0, 0));
+            var d = Const.db;
+            interestPoints.push(new InterestPoint(
+                d.vide_chanceAppear,
+                d.vide_distanceMin >= 0 ? d.vide_distanceMin : planetSize + d.vide_distanceMin,
+                d.vide_distanceMax >= 0 ? d.vide_distanceMax : planetSize + d.vide_distanceMax,
+                d.vide_chanceEarn,
+                d.vide_minEarn,
+                d.vide_maxEarn,
+                d.vide_chancePA,
+                d.vide_numPA));
+
+            interestPoints.push(new InterestPoint(
+                d.ship_chanceAppear,
+                d.ship_distanceMin >= 0 ? d.ship_distanceMin : planetSize + d.ship_distanceMin,
+                d.ship_distanceMax >= 0 ? d.ship_distanceMax : planetSize + d.ship_distanceMax,
+                d.ship_chanceEarn,
+                d.ship_minEarn,
+                d.ship_maxEarn,
+                d.ship_chancePA,
+                d.ship_numPA));
+
+            interestPoints.push(new InterestPoint(
+                d.crevasse_chanceAppear,
+                d.crevasse_distanceMin >= 0 ? d.crevasse_distanceMin : planetSize + d.crevasse_distanceMin,
+                d.crevasse_distanceMax >= 0 ? d.crevasse_distanceMax : planetSize + d.crevasse_distanceMax,
+                d.crevasse_chanceEarn,
+                d.crevasse_minEarn,
+                d.crevasse_maxEarn,
+                d.crevasse_chancePA,
+                d.crevasse_numPA));
+             
+            interestPoints.push(new InterestPoint(
+                d.wreck_chanceAppear,
+                d.wreck_distanceMin >= 0 ? d.wreck_distanceMin : planetSize + d.wreck_distanceMin,
+                d.wreck_distanceMax >= 0 ? d.wreck_distanceMax : planetSize + d.wreck_distanceMax,
+                d.wreck_chanceEarn,
+                d.wreck_minEarn,
+                d.wreck_maxEarn,
+                d.wreck_chancePA,
+                d.wreck_numPA));
+
+            interestPoints.push(new InterestPoint(
+                d.village_chanceAppear,
+                d.village_distanceMin >= 0 ? d.village_distanceMin : planetSize + d.village_distanceMin,
+                d.village_distanceMax >= 0 ? d.village_distanceMax : planetSize + d.village_distanceMax,
+                d.village_chanceEarn,
+                d.village_minEarn,
+                d.village_maxEarn,
+                d.village_chancePA,
+                d.village_numPA));
+
+            interestPoints.push(new InterestPoint(
+                d.ore_chanceAppear,
+                d.ore_distanceMin >= 0 ? d.ore_distanceMin : planetSize + d.ore_distanceMin,
+                d.ore_distanceMax >= 0 ? d.ore_distanceMax : planetSize + d.ore_distanceMax,
+                d.ore_chanceEarn,
+                d.ore_minEarn,
+                d.ore_maxEarn,
+                d.ore_chancePA,
+                d.ore_numPA));
+    
+            interestPoints.push(new InterestPoint(
+                d.plant_chanceAppear,
+                d.plant_distanceMin >= 0 ? d.plant_distanceMin : planetSize + d.plant_distanceMin,
+                d.plant_distanceMax >= 0 ? d.plant_distanceMax : planetSize + d.plant_distanceMax,
+                d.plant_chanceEarn,
+                d.plant_minEarn,
+                d.plant_maxEarn,
+                d.plant_chancePA,
+                d.plant_numPA));
+
+                                            
+            interestPoints.push(new InterestPoint(
+                d.corpse_chanceAppear,
+                d.corpse_distanceMin >= 0 ? d.corpse_distanceMin : planetSize + d.corpse_distanceMin,
+                d.corpse_distanceMax >= 0 ? d.corpse_distanceMax : planetSize + d.corpse_distanceMax,
+                d.corpse_chanceEarn,
+                d.corpse_minEarn,
+                d.corpse_maxEarn,
+                d.corpse_chancePA,
+                d.corpse_numPA));
+
+            // interestPoints.push(new InterestPoint(0, 0, 0, 30, 10, 30, 0, 0));
+            // interestPoints.push(new InterestPoint(0, 0, 0, 0, 0, 0, 0, 0));
+            // interestPoints.push(new InterestPoint(100, 1, planetSize - 1, 70, 10, 30, 30, -1));
+            // interestPoints.push(new InterestPoint(25, planetSize - 2, planetSize - 1, 80, 100, 300, 20, -2));
+            // interestPoints.push(new InterestPoint(50, planetSize - 2, planetSize - 1, 0, 0, 0, 100, maxAP));
+            // interestPoints.push(new InterestPoint(50, 1, planetSize - 1, 100, 50, 100, 0, 0));
+            // interestPoints.push(new InterestPoint(50, 1, 1, 100, 30, 50, 0, 0));
+            // interestPoints.push(new InterestPoint(25, 1, planetSize - 1, 50, 10, 100, 0, 0));
         }
     }
 
