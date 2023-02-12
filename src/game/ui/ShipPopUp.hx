@@ -10,7 +10,7 @@ class ShipPopUp extends ui.win.Menu
         super(true);
         this.mask.backgroundTile = Tile.fromColor(0x0,1,1,0.6);
         
-        addTitle('$name menu');
+        addTitle('This is your ship!', true);
         addTitle(description);
         addButton("Yes", yes, true);
         addButton("No", fuckIt, true);

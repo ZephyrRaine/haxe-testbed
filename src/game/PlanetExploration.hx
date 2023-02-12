@@ -344,8 +344,9 @@ class PlanetExploration extends Entity{
 
         gm.addPermanentGold(Gold);
         m.addTitle(lost?"FAILURE":"SUCCESS");
-        m.addTitle("You're coming home");
-        m.addTitle('With $Gold gold');
+        m.addSpacer();
+        m.addTitle('You\'re coming home with ${Gold}g');
+        m.addSpacer();
         m.addButton("Ok", gm.switchToVillage,true);
         hxd.Res.sounds.sfx.Explore_Result.play(false, 0.5);
     }
@@ -354,8 +355,10 @@ class PlanetExploration extends Entity{
     {
 
         var m = new Menu();
+        m.win.maxWidth=300;
         
         m.addTitle(str);
+        m.addSpacer();
         m.addButton("Ok", cb,true);
     }
 

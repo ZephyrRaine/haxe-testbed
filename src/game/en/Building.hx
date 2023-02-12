@@ -117,6 +117,7 @@ class Building extends Entity {
     {
         if(display_name == "Ship")
         {
+            description = 'Start your expedition #${cast(game, GameManager).NumExpedition+1}?';
             new ShipPopUp(display_name, description, cast(Game.ME, GameManager).switchToExploration);
             return;
         }

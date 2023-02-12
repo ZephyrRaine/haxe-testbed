@@ -7,14 +7,15 @@ import ui.BuildingPopUp;
 import h2d.Tile;
 import h2d.TileGroup;
 
-class Ship extends Entity {
-
+class Ship extends Entity 
+{
 	public static var Instance : Ship;
 
     var display_name : String;
     var description : String;
 
-    public function new(b:Entity_Ship) {
+    public function new(b:Entity_Ship) 
+    {
         super(b.cx,b.cy);
 
         Instance = this;
@@ -22,7 +23,7 @@ class Ship extends Entity {
         set_wid(b.width);
         set_hei(b.height);
         display_name = b.f_DisplayName;
-        description = b.f_Description;
+        description = 'Start your expedition #${cast(game, GameManager).NumExpedition+1}?';
 
         spr.useCustomTile(b.getTile());
     }

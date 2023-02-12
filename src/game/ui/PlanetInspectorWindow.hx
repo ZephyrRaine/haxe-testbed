@@ -36,7 +36,7 @@ class PlanetInspectorWindow extends Window
 
        var f = new h2d.Flow(win);
         f.padding = 2;
-f.horizontalSpacing = 20;
+        f.horizontalSpacing = 20;
        f.layout = Horizontal; 
        goldText = new h2d.Text(Assets.menuFont, f);
        goldText.filter = new dn.heaps.filter.PixelOutline();

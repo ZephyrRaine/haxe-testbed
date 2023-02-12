@@ -234,7 +234,7 @@ class App extends dn.Process {
 		controller.bindPadLStick4(MoveLeft, MoveRight, MoveUp, MoveDown);
 		controller.bindPad(Jump, [B,Y]);
 		controller.bindPad(Interact, [A,X]);
-		controller.bindPad(Restart, SELECT);
+	//	controller.bindPad(Restart, SELECT);
 		controller.bindPad(Pause, START);
 		controller.bindPad(MoveLeft, [LSTICK_LEFT, DPAD_LEFT]);
 		controller.bindPad(MoveRight, [LSTICK_RIGHT, DPAD_RIGHT]);
@@ -253,7 +253,7 @@ class App extends dn.Process {
 		controller.bindKeyboard(MoveDown, [K.DOWN, K.S]);
 		controller.bindKeyboard(Jump, K.SPACE);
 		controller.bindKeyboard(Interact, [K.ENTER, K.X]);
-		controller.bindKeyboard(Restart, K.R);
+//		controller.bindKeyboard(Restart, K.R);
 		controller.bindKeyboard(ScreenshotMode, K.F9);
 		controller.bindKeyboard(Pause, K.P);
 		controller.bindKeyboard(Pause, K.PAUSE_BREAK);
