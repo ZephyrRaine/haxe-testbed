@@ -1,5 +1,8 @@
 package ui.win;
 
+import hxd.res.Sound;
+import dn.heaps.Sfx;
+
 typedef MenuItem = {
 	var f: h2d.Flow;
 	var tf: h2d.Text;
@@ -16,7 +19,6 @@ class Menu extends ui.Modal {
 	var items : FixedArray<MenuItem> = new FixedArray(40);
 	var cursor : h2d.Bitmap;
 	var cursorInvalidated = true;
-
 
 	public function new(useMouse=true) {
 		super(App.ME);
@@ -39,7 +41,10 @@ class Menu extends ui.Modal {
 
 	inline function set_curIdx(v) {
 		if( curIdx!=v )
+		{
 			invalidateCursor();
+			hxd.Res.sounds.sfx.UI_Move.play(false, 1.0);
+		}
 		return curIdx = v;
 	}
 

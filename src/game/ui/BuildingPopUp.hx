@@ -14,6 +14,7 @@ class BuildingPopUp extends ui.win.Menu
 		if(yes != null) addButton('Upgrade ($nextUpgradeCost gold)', yes, true);
         else addTitle(nextUpgradeCost > 0 ? 'Next Upgrade : $nextUpgradeCost gold' : 'Maxed Out!');
         addButton("Close", fuckIt, true);
+		hxd.Res.sounds.sfx.Building_Open.play(false, 0.5);
     }
 
     public function fuckIt()

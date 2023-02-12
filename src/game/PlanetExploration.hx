@@ -59,11 +59,24 @@ class PlanetExploration extends Entity{
     public function addGold(value : Int)
     {
         Gold += value;
+
+        if(value > 0)
+            hxd.Res.sounds.sfx.Gold_Earn.play(false, 0.6);
+        else
+            hxd.Res.sounds.sfx.Gold_Nothing.play(false, 1.0);
     }
 
     public function addAP(value : Int)
     {
         AP += value;
+
+        if(value != 0)
+        {
+            if(value > 0)
+                hxd.Res.sounds.sfx.AP_Earn.play(false, 0.6);
+            else if(value < 0)
+                hxd.Res.sounds.sfx.AP_Lost.play(false, 0.5);
+        }
     }
 
     public function new(state:PlanetState)
@@ -157,7 +170,7 @@ class PlanetExploration extends Entity{
     {
         if((wantedX != 0 || wantedY != 0) && tryMove(playerEntity.cx+wantedX, playerEntity.cy+wantedY))
         {
-    
+            hxd.Res.sounds.sfx.Explore_Move.play(false, 0.4);
         }
 
         checkEndRun(nf_cx, nf_cy);
@@ -287,6 +300,7 @@ class PlanetExploration extends Entity{
         m.addTitle("You're coming home");
         m.addTitle('With $Gold gold');
         m.addButton("Ok", gm.switchToVillage,true);
+        hxd.Res.sounds.sfx.Explore_Result.play(false, 0.5);
     }
 
     function rewardModal(str:String, cb:()->Void)

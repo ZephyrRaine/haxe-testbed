@@ -66,5 +66,6 @@ class Building extends Entity {
         cast(game,GameManager).addPermanentGold(-nextCost);
         building_level++;
         cast(game,GameManager).buildingsLevel[fuckingType] = building_level;
+        hxd.Res.sounds.sfx.Building_Upgrade.play(false, 1.0);
     }
 }
