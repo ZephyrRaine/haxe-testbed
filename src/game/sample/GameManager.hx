@@ -25,7 +25,7 @@ class GameManager extends Game {
 		return Const.STARTING_AP + Std.int(buildingsLevel[AP]) * Const.INCREMENT_AP;
 	  }
 
-	var _gold : Int;
+	var _gold : Int = 0;
 	public var Gold(get, set):Int;
 
 	function get_Gold() return _gold;

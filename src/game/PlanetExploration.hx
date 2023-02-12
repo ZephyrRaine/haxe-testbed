@@ -16,7 +16,7 @@ enum TILE_STATUS
 class PlanetExploration extends Entity{
 	public static var ME : PlanetExploration;
 
-    var _gold : Int;
+    var _gold : Int = 0;
 	var _ap : Int;
 	public var Gold(get, set):Int;
 
