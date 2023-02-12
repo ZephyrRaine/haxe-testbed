@@ -68,6 +68,7 @@ class Building extends Entity {
     public function showLabel(show:Bool)
     {
         label.parent.visible = show;
+        label.text = getDisplayName();
     }
 
     override function dispose() {

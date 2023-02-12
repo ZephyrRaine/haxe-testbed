@@ -34,6 +34,7 @@ class SamplePlayer extends Entity {
 
 		// Camera tracks this
 		camera.trackEntity(this, true);
+		camera.targetZoom = 1.5;
 		camera.clampToLevelBounds = true;
 
 		// Init controller

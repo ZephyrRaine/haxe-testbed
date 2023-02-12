@@ -13,8 +13,13 @@ class PlanetInspectorWindow extends Window
 
     public override function new() {
         super(null);
-
+        win.padding = 10;
+        win.x = 10000;
+        win.layout = Vertical;
+        win.backgroundTile = Assets.tiles.getTile("ui_border");
+        win.setPosition((w()- 100)/Const.UI_SCALE , 50/Const.UI_SCALE);
         var f = new h2d.Flow(win);
+        // win.horizontalAlign = Right;
 		f.padding = 2;
 
 
@@ -46,8 +51,21 @@ class PlanetInspectorWindow extends Window
         variablesText = new h2d.Text(Assets.fontPixel, root);
 		variablesText.filter = new dn.heaps.filter.PixelOutline();
 		updateHUD(0,0);
+		dn.Process.resizeAll();
 
     }
+
+    override function onResize() {
+		super.onResize();
+
+		root.setScale(Const.UI_SCALE);
+
+		var w = M.ceil( w()/Const.UI_SCALE );
+		var h = M.ceil( h()/Const.UI_SCALE );
+		win.x = Std.int( w - (win.outerWidth +20));
+		win.y = Std.int( h*0.5 - win.outerHeight*0.5 );
+	}
+
 
     public function updateHUD(gold:Int, AP:Int)
     {
