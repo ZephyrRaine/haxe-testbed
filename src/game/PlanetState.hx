@@ -27,9 +27,10 @@ class PlanetState
     public var planetGrid : Array<Array<TILE_TYPE>>;
     public var interestPoints : Array<InterestPoint>;
 
-    public function new(_planetSize:Int)
+    public function new()
     {
-        Init(_planetSize, cast(Game.ME, GameManager).MaxAP);
+        var gm = cast(Game.ME, GameManager);
+        Init(gm.MaxAP, Std.int(gm.buildingsLevel[AP]));
 
         GenerateBasicPoints();
         GenerateInterestPoints();
@@ -118,12 +119,12 @@ class PlanetState
         return ip;
     }
 
-    private function Init(_planetSize : Int, maxAP : Int)
+    private function Init(maxAP : Int, buildingAPLevel : Int)
     {
         rand = new Rand(0);
         rand.initSeed(Std.random(999999));
 
-        planetSize = _planetSize < 5 ? 5 : _planetSize;
+        planetSize = rand.irange(4, 4 + buildingAPLevel);
         if(planetSize % 2 == 0)
         {
             planetSize += 1;

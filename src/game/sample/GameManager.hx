@@ -122,7 +122,7 @@ class GameManager extends Game {
 
 	function initExploration()
 	{
-		var state = new PlanetState(5);
+		var state = new PlanetState();
 		new PlanetExploration(state);
 	}
 
