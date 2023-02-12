@@ -22,7 +22,7 @@ class Menu extends ui.Modal {
 	var cursor : h2d.Bitmap;
 	var cursorInvalidated = true;
 
-	public function new(useMouse=true) { 
+	public function new(useMouse=false) { 
 		super(App.ME);
 
 		this.useMouse = useMouse;
@@ -32,6 +32,7 @@ class Menu extends ui.Modal {
 		win.horizontalAlign = Left;
 		win.backgroundTile = Assets.tiles.getTile("ui_border");
 
+		useMouse =false;
 		mask.enableInteractive = useMouse;
 		if( useMouse ) {
 			mask.interactive.onClick = _->close();
