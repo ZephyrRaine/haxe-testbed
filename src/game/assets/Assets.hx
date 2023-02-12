@@ -42,7 +42,7 @@ class Assets {
 
 
 		// gameJamFont = new hxd.res.BitmapFont(hxd.Res.fonts.gamejam_font_16_xml.entry).toFont();
-		planets = [for (x in 1...17) hxd.Res.loader.load('bg/planets/body/Barren_or_Moon/$x.png').toTile()];
+		planets = [for (x in 1...127) hxd.Res.loader.load('bg/planets/body/$x.png').toTile()];
 		// build sprite atlas directly from Aseprite file
 		tiles = dn.heaps.assets.Aseprite.convertToSLib(Const.FPS, hxd.Res.atlas.tiles.toAseprite());
 		hero = dn.heaps.assets.Aseprite.convertToSLib(Const.FPS, hxd.Res.atlas.hero.toAseprite());
