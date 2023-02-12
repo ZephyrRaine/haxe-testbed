@@ -8,7 +8,7 @@ class BuildingPopUp extends ui.win.Menu
         super(true);
         this.mask.backgroundTile = Tile.fromColor(0x0,1,1,0.6);
         
-        addTileTitled('$name - lvl.$currentLevel', tile);
+        addTileTitled(currentLevel == 0 ? '$name' : '$name - lvl.$currentLevel', tile);
         addSpacer();
 
         addTitle(description);
@@ -16,8 +16,8 @@ class BuildingPopUp extends ui.win.Menu
         addSpacer();
         addSpacer();
 
-		if(yes != null) addButton('Upgrade ($nextUpgradeCost gold)', yes, true);
-        else addTitle(nextUpgradeCost > 0 ? 'Next Upgrade : $nextUpgradeCost gold' : 'Maxed Out!');
+		if(yes != null) addButton('${currentLevel==0?"Unlock":"Upgrade"} ($nextUpgradeCost G)', yes, true);
+        else addTitle(nextUpgradeCost > 0 ? '${currentLevel==0?"Unlock Cost":"Next Upgrade"} : $nextUpgradeCost G' : 'Maxed Out!');
         addButton("Close", fuckIt, true);
 		hxd.Res.sounds.sfx.Building_Open.play(false, 0.5);
     }

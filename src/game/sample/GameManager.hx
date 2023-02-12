@@ -63,6 +63,10 @@ class GameManager extends Game {
 		
 		Console.ME.add("set_building_level", (name,value)->{
 			buildingsLevel[name] = value;
+			for(b in en.Building.ALL)
+			{
+				b.updateLevelInfo();
+			}
 		});
 
 		Console.ME.add("give_gold", (value)->

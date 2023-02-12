@@ -23,6 +23,12 @@ class Building extends Entity {
     var icon : Tile;
 
     var fontBuilding : h2d.Font = hxd.Res.fonts.FutilePro.toFont();
+    var bg : Bitmap;
+
+    function isMaxLevel() : Bool
+    {
+        return building_level == building_costs.length;
+    }
 
     var merchantAI : en.Merchant;
 
@@ -51,7 +57,7 @@ class Building extends Entity {
         building_costs = b.f_Cost; 
         spr.useCustomTile(b.getTile());
 
-        var bg = new h2d.Bitmap(Assets.tiles.getTile("ui_border_3"));
+        bg = new h2d.Bitmap(Assets.tiles.getTile("ui_border_3"));
 
         label = new h2d.Text(fontBuilding, bg);
         label.filter = new dn.heaps.filter.PixelOutline();
@@ -64,7 +70,27 @@ class Building extends Entity {
         
         bg.visible = false;
 
+        updateLevelInfo();
+
         game.scroller.add(bg, Const.DP_UI);
+    }
+
+    public function updateLevelInfo()
+    {      
+        if(display_name == "Ship")
+            return;
+
+        
+        label.text = getDisplayName();
+        label.textColor = White;
+        bg.setPosition( Std.int((cx+xr)*Const.GRID -label.textWidth*0.5), Std.int((cy-1+yr)*Const.GRID -label.textHeight-3));
+        bg.width = label.textWidth +10;
+        bg.height = 5;
+        label.setPosition(5, -label.textHeight-2);
+
+        this.spr.colorize(building_level==0 ? Col.coldGray(0.05) : Col.white());
+        this.spr.alpha = building_level==0 ? 0.9 : 1.0;
+        merchantAI.entityVisible = building_level == building_costs.length;        
     }
 
     override function postUpdate()
@@ -95,12 +121,18 @@ class Building extends Entity {
 
         var nextCost = building_level >= building_costs.length ? -1 : building_costs[building_level];
         var currentGold = cast(game, GameManager).Gold;
-
-        new BuildingPopUp(display_name, description, building_level, building_costs.length, building_costs[building_level], icon, nextCost != -1 && currentGold >= nextCost ? upgrade : null);
+        if(building_level == 0)
+        {
+            new BuildingPopUp("???", "A strange building", 0, building_costs.length, building_costs[building_level], Assets.tiles.getTile('locked_building'), nextCost != -1 && currentGold >= nextCost ? upgrade : null);
+        }
+        else
+        {
+            new BuildingPopUp(display_name, description, building_level, building_costs.length, building_costs[building_level], icon, nextCost != -1 && currentGold >= nextCost ? upgrade : null);
+        }
     }
 
     public function getDisplayName() : String {
-        return display_name == "Ship" ? "Ship" : display_name + " - lvl. " + building_level;
+        return display_name == "Ship" ? "Ship" : (building_level==0?"???":display_name + " - lvl. " + (isMaxLevel()?"max":Std.string(building_level)));
     }
 
     public function upgrade()
@@ -111,7 +143,11 @@ class Building extends Entity {
         var nextCost = building_costs[building_level];
         cast(game,GameManager).addPermanentGold(-nextCost);
         building_level++;
+        
         cast(game,GameManager).buildingsLevel[fuckingType] = building_level;
+
+        updateLevelInfo();
+
         hxd.Res.sounds.sfx.Building_Upgrade.play(false, 1.0);
         fx.dotsExplosionCustom(centerX, centerY, 0xffcc00);
     }
