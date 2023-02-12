@@ -11,7 +11,7 @@
 	"iid": "de07ff90-7820-11ed-ac6b-bbc68d89d940",
 	"jsonVersion": "1.2.5",
 	"appBuildId": 464870,
-	"nextUid": 230,
+	"nextUid": 232,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "LinearHorizontal",
@@ -630,7 +630,72 @@
 			"limitBehavior": "MoveLastOne",
 			"pivotX": 0.5,
 			"pivotY": 1,
-			"fieldDefs": []
+			"fieldDefs": [
+				{
+					"identifier": "DisplayName",
+					"doc": null,
+					"__type": "String",
+					"uid": 230,
+					"type": "F_String",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefTags": [],
+					"tilesetUid": null
+				},
+				{
+					"identifier": "Description",
+					"doc": null,
+					"__type": "String",
+					"uid": 231,
+					"type": "F_Text",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefTags": [],
+					"tilesetUid": null
+				}
+			]
 		}
 	], "tilesets": [
 		{
@@ -906,7 +971,16 @@
 							"height": 64,
 							"defUid": 229,
 							"px": [712,256],
-							"fieldInstances": []
+							"fieldInstances": [
+								{ "__identifier": "DisplayName", "__value": "Ship", "__type": "String", "__tile": null, "defUid": 230, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Ship"]
+								}] },
+								{ "__identifier": "Description", "__value": "Launch a new expedition.", "__type": "String", "__tile": null, "defUid": 231, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Launch a new expedition."]
+								}] }
+							]
 						}
 					]
 				},

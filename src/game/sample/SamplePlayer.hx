@@ -125,7 +125,7 @@ class SamplePlayer extends Entity {
 			walkSpeed = ca.getAnalogValue2(MoveLeft,MoveRight); // -1 to 1
 		}
 
-		checkBuildings();
+		checkEntities();
 	}
 
 
@@ -145,10 +145,25 @@ class SamplePlayer extends Entity {
 		
 	}
 
-	function checkBuildings()
+	function checkEntities()
 	{
-		var currentBuilding = null;
-		for(b in en.Building.ALL)
+		var currentShip = en.Ship.Instance;
+
+		if(currentShip != null && distPx(currentShip) <= currentShip.largeRadius)
+		{
+			interactTooltip.visible = true;
+			hud.debug(currentShip.getDisplayName());
+			if(ca.isPressed(Interact))
+			{
+				interactTooltip.visible = false;
+				currentShip.displayPopUp();
+			}
+		}
+		else
+		{
+			var currentBuilding = null;
+
+			for(b in en.Building.ALL)
 			{
 				if(distPx(b) <= b.largeRadius)
 				{
@@ -156,21 +171,21 @@ class SamplePlayer extends Entity {
 				}
 			}
 
-		if(currentBuilding != null)
-		{
-			interactTooltip.visible = true;
-			hud.debug(currentBuilding.getDisplayName());
-			if(ca.isPressed(Interact))
+			if(currentBuilding != null)
+			{
+				interactTooltip.visible = true;
+				hud.debug(currentBuilding.getDisplayName());
+				if(ca.isPressed(Interact))
+				{
+					interactTooltip.visible = false;
+					currentBuilding.displayPopUp();
+				}
+			}
+			else
 			{
 				interactTooltip.visible = false;
-				currentBuilding.displayPopUp();
+				hud.debug("");
 			}
 		}
-		else
-		{
-			interactTooltip.visible = false;
-			hud.debug("");
-		}
-
 	}
 }

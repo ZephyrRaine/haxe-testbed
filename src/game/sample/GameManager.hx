@@ -87,7 +87,10 @@ class GameManager extends Game {
 		}
 		
 		//ONLY IF IN VILLAGE
-
+		for(s in l.l_Entities.all_Ship)
+		{
+			new Ship(s);
+		}
 		for(b in l.l_Entities.all_Building)
 		{
 			new Building(b);
