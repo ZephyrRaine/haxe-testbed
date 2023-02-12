@@ -15,6 +15,11 @@ class Assets {
 	/** Main atlas **/
 	public static var tiles : SpriteLib;
 	public static var hero : SpriteLib;
+	public static var merchant : SpriteLib;
+	public static var mudGuard : SpriteLib;
+	public static var redDude : SpriteLib;
+	public static var smallDroid : SpriteLib;
+	public static var totemDude : SpriteLib;
 
 	/** LDtk world data **/
 	public static var worldData : World;
@@ -41,6 +46,11 @@ class Assets {
 		// build sprite atlas directly from Aseprite file
 		tiles = dn.heaps.assets.Aseprite.convertToSLib(Const.FPS, hxd.Res.atlas.tiles.toAseprite());
 		hero = dn.heaps.assets.Aseprite.convertToSLib(Const.FPS, hxd.Res.atlas.hero.toAseprite());
+		merchant = dn.heaps.assets.Aseprite.convertToSLib(Const.FPS, hxd.Res.atlas.merchant.toAseprite());
+		mudGuard = dn.heaps.assets.Aseprite.convertToSLib(Const.FPS, hxd.Res.atlas.mudGuard.toAseprite());
+		redDude = dn.heaps.assets.Aseprite.convertToSLib(Const.FPS, hxd.Res.atlas.redDude.toAseprite());
+		smallDroid = dn.heaps.assets.Aseprite.convertToSLib(Const.FPS, hxd.Res.atlas.smallDroid.toAseprite());
+		totemDude = dn.heaps.assets.Aseprite.convertToSLib(Const.FPS, hxd.Res.atlas.totemDude.toAseprite());
 
 		// Hot-reloading of CastleDB
 		#if debug

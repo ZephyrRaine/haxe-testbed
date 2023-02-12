@@ -118,7 +118,7 @@ class PlanetExploration extends Entity{
             for(x in 0...planetState.planetSize)
             {
                 var e = new Entity(x,y);
-                if(gm.buildingsLevel[RADAR] == 1 && planetState.getTileType(x,y) != VIDE)
+                if(gm.buildingsLevel[RADAR] > 0 && planetState.getTileType(x,y) != VIDE)
                     e.spr.set(AssetsDictionaries.tiles.map_hidden_spotted);
                 else
                     e.spr.set(AssetsDictionaries.tiles.map_hidden);
