@@ -6,6 +6,7 @@ import dn.heaps.slib.*;
 	This class centralizes all assets management (ie. art, sounds, fonts etc.)
 **/
 class Assets {
+
 	// Fonts
 	public static var fontPixel : h2d.Font;
 	public static var fontPixelMono : h2d.Font;
