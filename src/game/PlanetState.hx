@@ -262,7 +262,7 @@ class PlanetState
                 
                 if(xPos.length > 0)
                 {
-                    var randomTile = rand.irange(0, xPos.length);
+                    var randomTile = rand.irange(0, xPos.length - 1);
     
                     planetGrid[xPos[randomTile]][yPos[randomTile]] = i;
                 }
