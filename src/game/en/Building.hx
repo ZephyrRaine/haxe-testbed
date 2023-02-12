@@ -30,6 +30,8 @@ class Building extends Entity {
         return building_level == building_costs.length;
     }
 
+    var merchantAI : en.Merchant;
+
     public function new(b:Entity_Building) {
         super(b.cx,b.cy);
 
@@ -41,11 +43,11 @@ class Building extends Entity {
         fuckingType = ANALYZER;
         switch(b.f_BUILDING_TYPE)
         {
-            case "AP" : fuckingType = AP; 
-            case "RADAR" : fuckingType = RADAR;
-            case "EXTRACTOR" : fuckingType = EXTRACTOR;
-            case "ANALYZER": fuckingType = ANALYZER;
-            case "SCOPE" : fuckingType = SCOPE;
+            case "AP" : fuckingType = AP; merchantAI = new en.Merchant(Assets.merchant, 0.4, cx, cy);
+            case "RADAR" : fuckingType = RADAR; merchantAI = new en.Merchant(Assets.smallDroid, 0.53, cx, cy);
+            case "EXTRACTOR" : fuckingType = EXTRACTOR; merchantAI = new en.Merchant(Assets.mudGuard, 0.39, cx, cy);
+            case "ANALYZER": fuckingType = ANALYZER; merchantAI = new en.Merchant(Assets.redDude, 0.475, cx, cy);
+            case "SCOPE" : fuckingType = SCOPE; merchantAI = new en.Merchant(Assets.totemDude, 0.53, cx, cy);
         }
         if(b.f_BUILDING_TYPE != "")
             icon = Assets.tiles.getTile('building_icon_${b.f_BUILDING_TYPE}');

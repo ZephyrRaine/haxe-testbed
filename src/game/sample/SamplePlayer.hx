@@ -43,10 +43,10 @@ class SamplePlayer extends Entity {
 
 		// Player
 		spr.set(Assets.hero);
-		spr.setCenterRatio(0.4, 1.0);
+		spr.setCenterRatio(0.41, 1.0);
 
-		spr.anim.registerStateAnim("walk", 5, 1.0, ()->walkSpeed!=0.0);
 		spr.anim.registerStateAnim("idle", 0, 1.0);
+		spr.anim.registerStateAnim("run", 5, 1.0, ()->walkSpeed!=0.0);
 
 		interactTooltip = new h2d.Bitmap(Assets.tiles.getTile("UI_X_Button"),spr);
         interactTooltip.tile.setCenterRatio(0.5,0.5);
