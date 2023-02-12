@@ -128,6 +128,7 @@ class PlanetState
         startPosX = Std.int(planetSize / 2);
         startPosY = startPosX;
 
+        
         interestPoints = new Array<InterestPoint>();
         {
             var d = Const.db;
@@ -139,7 +140,7 @@ class PlanetState
                 d.vide_minEarn,
                 d.vide_maxEarn,
                 d.vide_chancePA,
-                d.vide_numPA));
+                d.vide_numPA >= 999 ? maxAP : d.vide_numPA));
 
             interestPoints.push(new InterestPoint(
                 d.ship_chanceAppear,
@@ -149,7 +150,7 @@ class PlanetState
                 d.ship_minEarn,
                 d.ship_maxEarn,
                 d.ship_chancePA,
-                d.ship_numPA));
+                d.ship_numPA >= 999 ? maxAP : d.ship_numPA));
 
             interestPoints.push(new InterestPoint(
                 d.crevasse_chanceAppear,
@@ -159,7 +160,7 @@ class PlanetState
                 d.crevasse_minEarn,
                 d.crevasse_maxEarn,
                 d.crevasse_chancePA,
-                d.crevasse_numPA));
+                d.crevasse_numPA >= 999 ? maxAP : d.crevasse_numPA));
              
             interestPoints.push(new InterestPoint(
                 d.wreck_chanceAppear,
@@ -169,7 +170,7 @@ class PlanetState
                 d.wreck_minEarn,
                 d.wreck_maxEarn,
                 d.wreck_chancePA,
-                d.wreck_numPA));
+                d.wreck_numPA >= 999 ? maxAP : d.wreck_numPA));
 
             interestPoints.push(new InterestPoint(
                 d.village_chanceAppear,
@@ -179,7 +180,7 @@ class PlanetState
                 d.village_minEarn,
                 d.village_maxEarn,
                 d.village_chancePA,
-                d.village_numPA));
+                d.village_numPA >= 999 ? maxAP : d.village_numPA));
 
             interestPoints.push(new InterestPoint(
                 d.ore_chanceAppear,
@@ -189,7 +190,7 @@ class PlanetState
                 d.ore_minEarn,
                 d.ore_maxEarn,
                 d.ore_chancePA,
-                d.ore_numPA));
+                d.ore_numPA >= 999 ? maxAP : d.ore_numPA));
     
             interestPoints.push(new InterestPoint(
                 d.plant_chanceAppear,
@@ -199,7 +200,7 @@ class PlanetState
                 d.plant_minEarn,
                 d.plant_maxEarn,
                 d.plant_chancePA,
-                d.plant_numPA));
+                d.plant_numPA >= 999 ? maxAP : d.plant_numPA));
 
                                             
             interestPoints.push(new InterestPoint(
@@ -210,7 +211,7 @@ class PlanetState
                 d.corpse_minEarn,
                 d.corpse_maxEarn,
                 d.corpse_chancePA,
-                d.corpse_numPA));
+                d.corpse_numPA >= 999 ? maxAP : d.corpse_numPA));
 
             // interestPoints.push(new InterestPoint(0, 0, 0, 30, 10, 30, 0, 0));
             // interestPoints.push(new InterestPoint(0, 0, 0, 0, 0, 0, 0, 0));
