@@ -11,6 +11,17 @@ class PlanetInspectorWindow extends Window
 
 	var variablesText : h2d.Text;
 
+    var _barValue : Float = 0;
+	public var BarValue(default,set) : Float = 0;
+    function set_BarValue(v)
+    {
+        _barValue = v;
+        updateBar(v);
+        return _barValue;
+    }
+
+    var bar : Bar;
+
     public override function new() {
         super(null);
         win.padding = 10;
@@ -45,6 +56,11 @@ class PlanetInspectorWindow extends Window
         var f = new h2d.Flow(win);
 		f.padding = 2;
 
+        bar = new Bar(Std.int(100),5, Col.white(), f);
+
+        var f = new h2d.Flow(win);
+		f.padding = 2;
+
         analyzer = new h2d.Text(Assets.fontPixelMono, f);
         analyzer.textColor = Col.fromInt(0x95b89d);
         analyzer.text = '';
@@ -52,6 +68,10 @@ class PlanetInspectorWindow extends Window
 
         variablesText = new h2d.Text(Assets.menuFont, root);
 		variablesText.filter = new dn.heaps.filter.PixelOutline();
+
+        var f = new h2d.Flow(win);
+        
+
 		updateHUD(0,0);
 		dn.Process.resizeAll();
 
@@ -73,6 +93,12 @@ class PlanetInspectorWindow extends Window
     {
         variablesText.text = 'g:$gold - ap:$AP';
     }
+
+    function updateBar(v:Float)
+    {
+        v = Math.min(Math.max(v,0),1);
+        bar.set(v,1);
+    }
     
 
     public function updateTile(payload : InspectorPayload)
@@ -81,5 +107,17 @@ class PlanetInspectorWindow extends Window
         action.text = payload.action;
         description.text = payload.description;
         analyzer.text = payload.analyzer;
+    }
+
+	public function DigNow(cb:() -> Void) {
+
+        action.text = "Digging...";
+        BarValue = 0;
+        var p = Game.ME.createChildProcess();
+        p.tw.createS(BarValue, 1, TEaseOut, Lib.rnd(2,5)).end(()->{
+            p.destroy();
+            cb();
+        });
+
     }
 }

@@ -21,6 +21,7 @@ class Bar extends h2d.Object {
 	var curValue : Float;
 	var curMax : Float;
 
+	
 	public function new(wid:Int, hei:Int, c:Col, ?p:h2d.Object) {
 		super(p);
 

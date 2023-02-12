@@ -16,6 +16,8 @@ enum TILE_STATUS
 class PlanetExploration extends Entity{
 	public static var ME : PlanetExploration;
 
+	var notifTw : dn.Tweenie;
+
     var _gold : Int;
 	var _ap : Int;
 	public var Gold(get, set):Int;
@@ -88,6 +90,8 @@ class PlanetExploration extends Entity{
         planetState = state;
 		ME = this;
 
+		notifTw = new Tweenie(Const.FPS);
+
 
         hei = planetState.planetSize*16;
         wid = planetState.planetSize*16;
@@ -133,6 +137,8 @@ class PlanetExploration extends Entity{
         nf_cx = state.startPosX;
         nf_cy = state.startPosY;
 
+
+
         updateTileInspector(state.startPosX, state.startPosY);
 
          
@@ -162,14 +168,20 @@ class PlanetExploration extends Entity{
     var wantedX:Int = 0;
     var wantedY:Int = 0;
 
+    var canMove:Bool = true;
+
     var nf_cx:Int =0;
     var nf_cy:Int = 0;
 
     override function preUpdate() 
     {
         super.preUpdate();
+
         wantedX = 0;
         wantedY = 0;
+
+        if(!canMove)
+            return;
 
         if(ca.isPressed(MoveUp))
             wantedY = -1;
@@ -275,19 +287,29 @@ class PlanetExploration extends Entity{
         var caseType = planetState.getTileType(cx,cy);
 
         if(caseType == PlanetState.TILE_TYPE.SHIP)
-        {
-            triggerEndRun(false);
-            return false;
-        }
+            {
+                triggerEndRun(false);
+                return false;
+            }
 
-        AP--;
-        new Bar(100,16,Col.red());
-        var str = planetState.digCase(cx,cy);
-        rewardModal(str, ()->{
-            tile_statuses[cx][cy] = FOUILLED;
-            mapTiles[cx][cy].spr.set('map_fouilled_$caseType');
-            updateTileInspector(cx,cy);
-        });
+        canMove = false;
+        planetInspector.DigNow(
+
+            ()->
+            {
+                    canMove = true;
+                    AP--;
+                    var str = planetState.digCase(cx,cy);
+                    rewardModal(str, ()->{
+                        tile_statuses[cx][cy] = FOUILLED;
+                        mapTiles[cx][cy].spr.set('map_fouilled_$caseType');
+                        updateTileInspector(cx,cy);
+                    });
+            
+            }
+        );
+
+
 
         return true;
     }
@@ -327,8 +349,9 @@ class PlanetExploration extends Entity{
 
     function rewardModal(str:String, cb:()->Void)
     {
-        var m = new Menu();
 
+        var m = new Menu();
+        
         m.addTitle(str);
         m.addButton("Ok", cb,true);
     }
