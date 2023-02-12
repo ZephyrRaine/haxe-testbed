@@ -113,5 +113,6 @@ class Building extends Entity {
         building_level++;
         cast(game,GameManager).buildingsLevel[fuckingType] = building_level;
         hxd.Res.sounds.sfx.Building_Upgrade.play(false, 1.0);
+        fx.dotsExplosionCustom(centerX, centerY, 0xffcc00);
     }
 }

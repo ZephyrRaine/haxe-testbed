@@ -137,10 +137,22 @@ class Fx extends GameChildProcess {
 			var p = allocMain_add( D.tiles.fxDot, x+rnd(0,3,true), y+rnd(0,3,true) );
 			p.alpha = rnd(0.4,1);
 			p.colorAnimS(color, 0x762087, rnd(0.6, 3)); // fade particle color from given color to some purple
-			p.moveAwayFrom(x,y, rnd(1,3)); // move away from source
+			p.moveAwayFrom(x,y, rnd(1,5)); // move away from source
 			p.frict = rnd(0.8, 0.9); // friction applied to velocities
 			p.gy = rnd(0, 0.02); // gravity Y (added on each frame)
 			p.lifeS = rnd(2,3); // life time in seconds
+		}
+	}
+
+	public inline function dotsExplosionCustom(x:Float, y:Float, color:Col) {
+		for(i in 0...80) {
+			var p = allocMain_add( D.tiles.fxDot, x+rnd(0,3,true), y+rnd(0,3,true) );
+			p.alpha = rnd(0.4,1);
+			p.colorAnimS(color, 0x762087, rnd(0.6, 3)); // fade particle color from given color to some purple
+			p.moveAwayFrom(x,y, rnd(1,5)); // move away from source
+			p.frict = rnd(0.8, 0.9); // friction applied to velocities
+			p.gy = rnd(0, 0.02); // gravity Y (added on each frame)
+			p.lifeS = rnd(0.8,1.5); // life time in seconds
 		}
 	}
 
