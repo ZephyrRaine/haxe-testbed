@@ -239,7 +239,7 @@ class PlanetState
     {
         for(i in 0...interestPoints.length)
         {
-            if(interestPoints[i].DoAppear(rand))
+            if(interestPoints[i].DoAppear(rand, planetSize))
             {
                 var distance : Int = interestPoints[i].GetRandomDistance(rand);
                 
@@ -274,7 +274,15 @@ class PlanetState
 private class InterestPoint
 {
     private var chanceAppear : Int;
-    public inline function DoAppear(r : Rand) return r.irange(0,100) <= chanceAppear;
+    public function DoAppear(r : Rand, planetSize : Int)
+    {
+        if(planetSize > 7)
+            return r.irange(0,100) <= Math.min(chanceAppear * 1.6, 100);
+        else if(planetSize > 5)
+            return r.irange(0,100) <= Math.min(chanceAppear * 1.2, 100);
+        else
+            return r.irange(0,100) <= chanceAppear;
+    }
     
     private var distanceMin : Int;
     private var distanceMax : Int;

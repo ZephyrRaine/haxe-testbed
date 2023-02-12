@@ -10,7 +10,7 @@ import h2d.TileGroup;
 class Building extends Entity {
 
 	public static var ALL : Array<Building> = [];
-
+    
     var display_name : String;
     var description : String;
     var building_level : Int;
@@ -24,6 +24,8 @@ class Building extends Entity {
 
     var fontBuilding : h2d.Font = hxd.Res.fonts.FutilePro.toFont();
     var bg : Bitmap;
+
+    var upgradeSound = hxd.Res.sounds.sfx.Building_Upgrade;
 
     function isMaxLevel() : Bool
     {
@@ -149,7 +151,8 @@ class Building extends Entity {
 
         updateLevelInfo();
 
-        hxd.Res.sounds.sfx.Building_Upgrade.play(false, 1.0);
+        upgradeSound.stop();
+        upgradeSound.play(false, 1.0);
         fx.dotsExplosionCustom(centerX, centerY, 0xffcc00);
     }
 }
