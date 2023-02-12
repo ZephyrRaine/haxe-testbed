@@ -36,8 +36,8 @@ class PlanetExploration extends Entity{
             v = 0;
             triggerEndRun(true);
         } 
-        if(v > gm.maxAP)
-    		v = gm.maxAP;
+        if(v > gm.MaxAP)
+    		v = gm.MaxAP;
 
         _ap = v;
 		planetInspector.updateHUD(Gold,AP);
@@ -80,7 +80,7 @@ class PlanetExploration extends Entity{
         hei = planetState.planetSize*16;
         wid = planetState.planetSize*16;
 
-        AP = gm.maxAP;
+        AP = gm.MaxAP;
 
 		// Camera tracks this
 		camera.trackEntity(this, true);
@@ -96,7 +96,7 @@ class PlanetExploration extends Entity{
             for(x in 0...planetState.planetSize)
             {
                 var e = new Entity(x,y);
-                if(gm.radarLevel == 1 && planetState.getTileType(x,y) != VIDE)
+                if(gm.buildingsLevel[RADAR] == 1 && planetState.getTileType(x,y) != VIDE)
                     e.spr.set(AssetsDictionaries.tiles.map_hidden_spotted);
                 else
                     e.spr.set(AssetsDictionaries.tiles.map_hidden);
@@ -104,13 +104,12 @@ class PlanetExploration extends Entity{
             }
         }
 
-        revealTiles(state.startPosX, state.startPosY, gm.scopeLevel);
+        revealTiles(state.startPosX, state.startPosY, gm.buildingsLevel[SCOPE]);
         
         playerEntity = new Entity(state.startPosX,state.startPosY);
         playerEntity.spr.set(AssetsDictionaries.tiles.map_player);
 
-
-        planetInspector.updateTile(TILE_TYPE.SHIP, REVEALED);
+        updateTileInspector(state.startPosX, state.startPosY);
 
         Console.ME.add("reveal", ()->
         {
@@ -157,6 +156,14 @@ class PlanetExploration extends Entity{
         }
     }
 
+    function updateTileInspector(cx:Int, cy:Int)
+    {
+        var payload = planetState.inspectCase(cx, cy, gm.buildingsLevel[ANALYZER]);
+        payload.action = (tile_statuses[cx][cy] == FOUILLED) ? 'Nothing left to do here' : payload.action;
+
+        planetInspector.updateTile(payload);
+    }
+
     function tryMove(ncx:Int, ncy:Int):Bool
     {
         var canMove : Bool = isInBounds(ncx,ncy)&&(ncx!=playerEntity.cx||ncy!=playerEntity.cy);
@@ -165,9 +172,9 @@ class PlanetExploration extends Entity{
 
         playerEntity.setPosCase(ncx,ncy);
         AP--;
-        revealTiles(ncx, ncy, gm.scopeLevel);
+        revealTiles(ncx, ncy, gm.buildingsLevel[SCOPE]);
 
-        planetInspector.updateTile(planetState.getTileType(ncx,ncy), REVEALED);
+        updateTileInspector(ncx, ncy);
 
         return true;
     }
@@ -234,7 +241,8 @@ class PlanetExploration extends Entity{
         rewardModal(str, ()->{
             tile_statuses[cx][cy] = FOUILLED;
             mapTiles[cx][cy].spr.set('map_fouilled_$caseType');
-            planetInspector.updateTile(caseType, FOUILLED);});
+            updateTileInspector(cx,cy);
+        });
 
         return true;
     }
@@ -255,7 +263,7 @@ class PlanetExploration extends Entity{
         var m = new Menu();
 
         if(lost)
-            Gold = Std.int(Gold * (gm.extractorLevel * 0.1));
+            Gold = Std.int(Gold * (gm.buildingsLevel[EXTRACTOR] * 0.1));
 
         gm.addPermanentGold(Gold);
 

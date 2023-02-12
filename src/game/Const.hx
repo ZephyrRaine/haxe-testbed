@@ -78,7 +78,11 @@ class Const {
 
 
 	////PLASTACOLIN
+
+	//Nombre d'AP max par défaut au début du jeu
 	public static final STARTING_AP:Int = 10;
+
+	//De combien les AP sont incrémentés pour chaque level du building correspondant 
 	public static final INCREMENT_AP:Int = 2;
 
 #end
