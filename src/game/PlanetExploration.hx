@@ -91,13 +91,16 @@ class PlanetExploration extends Entity{
 
         hei = planetState.planetSize*16;
         wid = planetState.planetSize*16;
+        spr.setTexture(h3d.mat.Texture.fromColor(White));
+        // spr.set(Tile.fromColor(White,Std.int(wid+8),Std.int(hei+8)));
+        spr.setCenterRatio(0,0);
+        spr.fitToBox(wid+8,hei+8);
+        spr.setPosition(-4,-4);
 
+        // spr.setScale(planetState.planetSize/3);
         AP = gm.MaxAP;
 
-		// Camera tracks this
-		camera.trackEntity(this, true);
-		camera.clampToLevelBounds = true;
-        
+
 		ca = App.ME.controller.createAccess();
 		ca.lockCondition = Game.isGameControllerLocked;
 
@@ -116,6 +119,8 @@ class PlanetExploration extends Entity{
             }
         }
 
+       
+
         revealTiles(state.startPosX, state.startPosY, gm.buildingsLevel[SCOPE]);
         
         playerEntity = new Entity(state.startPosX,state.startPosY);
@@ -125,6 +130,16 @@ class PlanetExploration extends Entity{
         nf_cy = state.startPosY;
 
         updateTileInspector(state.startPosX, state.startPosY);
+
+         
+		// Camera tracks this
+		// camera.trackEntity(mapTiles[state.startPosX][state.startPosY], true,0.5);
+		camera.trackEntity(playerEntity, true,0.5);
+		camera.clampToLevelBounds = false;
+        camera.targetOffX = wid/2;
+    //    camera.targetOffY = -hei/2;
+        camera.targetZoom = 2-((-5+planetState.planetSize)*0.15);
+        camera.centerOnTarget();
 
         Console.ME.add("reveal", ()->
         {
@@ -136,6 +151,8 @@ class PlanetExploration extends Entity{
                     }
                 }
         });
+
+        
     }
 
     var wantedX:Int = 0;

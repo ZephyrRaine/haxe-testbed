@@ -312,7 +312,7 @@ private class InterestPoint
         var apChance = analyzerLevel >= 2 ? '$chancePA%' : "???";
         var apRange = analyzerLevel >= 4 ? '$numPA AP' : "?? AP";
 
-        analyzerInfos = 'Chance of gold : ${goldChance} (${goldRange}) - Chance of AP : ${apChance} (${apRange})';
+        analyzerInfos = 'Chance of gold : ${goldChance} (${goldRange})\nChance of AP : ${apChance} (${apRange})';
         return analyzerInfos;
     }
 }

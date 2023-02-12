@@ -1,8 +1,7 @@
 package ui.win;
 
-import hxd.res.Sound;
+import h2d.Tile;
 import dn.heaps.Sfx;
-
 typedef MenuItem = {
 	var f: h2d.Flow;
 	var tf: h2d.Text;
@@ -24,9 +23,12 @@ class Menu extends ui.Modal {
 		super(App.ME);
 
 		this.useMouse = useMouse;
-		win.padding = 1;
+		win.padding = 10;
 		win.enableInteractive = useMouse;
 		win.verticalSpacing = 0;
+		win.horizontalAlign = Left;
+		win.backgroundTile = Assets.tiles.getTile("ui_border");
+		
 
 		mask.enableInteractive = useMouse;
 		if( useMouse ) {
@@ -63,6 +65,12 @@ class Menu extends ui.Modal {
 		f.minWidth = f.minHeight = 4;
 	}
 
+	public function addTile(tile:Tile)
+		{
+			var f = new h2d.Flow(win);
+			var t = new h2d.Bitmap(tile, f);
+		}
+
 	public function addTitle(str:String) {
 		var f = new h2d.Flow(win);
 		f.padding = 2;
@@ -71,7 +79,8 @@ class Menu extends ui.Modal {
 
 		var tf = new h2d.Text(Assets.fontPixelMono, f);
 		tf.textColor = Col.coldGray(0.6);
-		tf.text = Lib.padRight(str.toUpperCase(), labelPadLen, "_");
+		tf.text = str;
+//		tf.text = Lib.padRight(str.toUpperCase(), labelPadLen, "_");
 	}
 
 	public function addButton(label:String, cb:Void->Void, close=true) {
@@ -82,7 +91,7 @@ class Menu extends ui.Modal {
 		// Label
 		var tf = new h2d.Text(Assets.fontPixelMono, f);
 		tf.textColor = Black;
-		tf.text = Lib.padRight(label, labelPadLen);
+		tf.text = label;
 
 		var i : MenuItem = { f:f, tf:tf, cb:cb, close:close }
 		items.push(i);
