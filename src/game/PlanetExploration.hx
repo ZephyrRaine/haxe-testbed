@@ -26,7 +26,7 @@ class PlanetExploration extends Entity{
      if(v <= 0) v = 0;
 
 	  _gold = v;
-	  planetInspector.updateHUD(Gold,AP);
+	  planetInspector.updateHUD(Gold,AP,gm.MaxAP);
 	  return _gold;
 	}
 
@@ -41,7 +41,7 @@ class PlanetExploration extends Entity{
     		v = gm.MaxAP;
 
         _ap = v;
-		planetInspector.updateHUD(Gold,AP);
+		planetInspector.updateHUD(Gold,AP,gm.MaxAP);
 		return _ap;
 	}
 

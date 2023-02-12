@@ -85,7 +85,7 @@ class PlanetState
     {
         var ip :InspectorPayload = {title:"",description:"",action: "",analyzer: ""};
         var caseType = planetGrid[cx][cy];
-        ip.action = "Space - Dig (1AP)";
+        ip.action = "Act: Dig (1AP)";
 
         switch(caseType)
         {
@@ -95,7 +95,7 @@ class PlanetState
             case SHIP:
                 ip.title = "Ship";
                 ip.description = "Your beloved ship";
-                ip.action = "Space - Return Home (0AP)"; 
+                ip.action = "Act: Return Home (0AP)"; 
             case CREVASSE:
                 ip.title = "Crevasse";
                 ip.description = "A bottomless pit";

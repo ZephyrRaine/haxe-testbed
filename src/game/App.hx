@@ -232,14 +232,14 @@ class App extends dn.Process {
 
 		// Gamepad bindings
 		controller.bindPadLStick4(MoveLeft, MoveRight, MoveUp, MoveDown);
-		controller.bindPad(Jump, A);
-		controller.bindPad(Interact, X);
+		controller.bindPad(Jump, [B,Y]);
+		controller.bindPad(Interact, [A,X]);
 		controller.bindPad(Restart, SELECT);
 		controller.bindPad(Pause, START);
-		controller.bindPad(MoveLeft, DPAD_LEFT);
-		controller.bindPad(MoveRight, DPAD_RIGHT);
-		controller.bindPad(MoveUp, DPAD_UP);
-		controller.bindPad(MoveDown, DPAD_DOWN);
+		controller.bindPad(MoveLeft, [LSTICK_LEFT, DPAD_LEFT]);
+		controller.bindPad(MoveRight, [LSTICK_RIGHT, DPAD_RIGHT]);
+		controller.bindPad(MoveUp, [LSTICK_UP, DPAD_UP]);
+		controller.bindPad(MoveDown, [LSTICK_DOWN, DPAD_DOWN]);
 
 		controller.bindPad(MenuUp, [DPAD_UP, LSTICK_UP]);
 		controller.bindPad(MenuDown, [DPAD_DOWN, LSTICK_DOWN]);
@@ -260,7 +260,7 @@ class App extends dn.Process {
 
 		controller.bindKeyboard(MenuUp, [K.UP, K.Z, K.W]);
 		controller.bindKeyboard(MenuDown, [K.DOWN, K.S]);
-		controller.bindKeyboard(MenuOk, [K.SPACE, K.ENTER, K.F]);
+		controller.bindKeyboard(MenuOk, [K.ENTER, K.X]);
 		controller.bindKeyboard(MenuCancel, K.ESCAPE);
 
 		// Debug controls

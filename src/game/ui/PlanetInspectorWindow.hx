@@ -9,7 +9,8 @@ class PlanetInspectorWindow extends Window
     var action:h2d.Text;
     var analyzer:h2d.Text;
 
-	var variablesText : h2d.Text;
+	var goldText : h2d.Text;
+    var apText : h2d.Text;
 
     var _barValue : Float = 0;
 	public var BarValue(default,set) : Float = 0;
@@ -28,10 +29,21 @@ class PlanetInspectorWindow extends Window
         win.layout = Vertical;
         win.backgroundTile = Assets.tiles.getTile("ui_border_2");
        // win.setPosition((w()- 100)/Const.UI_SCALE , 50/Const.UI_SCALE);
+       
+       win.horizontalAlign = Right;
+       win.minWidth = 150;
+       win.maxWidth = 150;
+
+       var f = new h2d.Flow(win);
+        f.padding = 2;
+f.horizontalSpacing = 20;
+       f.layout = Horizontal; 
+       goldText = new h2d.Text(Assets.menuFont, f);
+       goldText.filter = new dn.heaps.filter.PixelOutline();
+       apText = new h2d.Text(Assets.menuFont, f);
+        apText.filter =  new dn.heaps.filter.PixelOutline();
+
         var f = new h2d.Flow(win);
-        win.horizontalAlign = Right;
-		win.minWidth = 150;
-		win.maxWidth = 150;
         f.padding = 2;
 
 
@@ -51,7 +63,7 @@ class PlanetInspectorWindow extends Window
 
         action = new h2d.Text(Assets.menuFont, f);
         action.textColor = Col.white();
-        action.text = "Space - Dig (1AP)";
+        action.text = "Dig (1AP)";
 
         var f = new h2d.Flow(win);
 		f.padding = 2;
@@ -66,13 +78,8 @@ class PlanetInspectorWindow extends Window
         analyzer.text = '';
         analyzer.textAlign = Right;
 
-        variablesText = new h2d.Text(Assets.menuFont, root);
-		variablesText.filter = new dn.heaps.filter.PixelOutline();
 
-        var f = new h2d.Flow(win);
-        
-
-		updateHUD(0,0);
+		updateHUD(0,0,0);
 		dn.Process.resizeAll();
 
     }
@@ -89,9 +96,13 @@ class PlanetInspectorWindow extends Window
 	}
 
 
-    public function updateHUD(gold:Int, AP:Int)
+    public function updateHUD(gold:Int, AP:Int, AP_MAX:Int)
     {
-        variablesText.text = 'g:$gold - ap:$AP';
+        // variablesText.text = 'g:$gold - ap:$AP';
+       goldText.text = '${gold} gold';
+       apText.text = '${AP} action points';
+       goldText.textColor = Col.graduate(gold/150, Col.white(), 0xFFD689, 0xFFA600);
+       apText.textColor = Col.graduate(1-(AP/AP_MAX),Col.green(), Col.white(), Col.red());
     }
 
     function updateBar(v:Float)
