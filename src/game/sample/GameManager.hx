@@ -24,17 +24,21 @@ class GameManager extends Game {
 		return Const.STARTING_AP + Std.int(buildingsLevel[AP]) * Const.INCREMENT_AP;
 	  }
 
-	  var _gold : Int;
-	  public var Gold(get, set):Int;
-  
-	  function get_Gold() return _gold;
-	  function set_Gold(v) {
-	   if(v <= 0) v = 0;
-  
-		_gold = v;
-		updateHUD(Gold);
-		return _gold;
-	  }
+	var _gold : Int;
+	public var Gold(get, set):Int;
+
+	function get_Gold() return _gold;
+	function set_Gold(v) {
+	if(v <= 0) v = 0;
+
+	_gold = v;
+	updateHUD(Gold);
+	return _gold;
+	}
+
+	var _numExpedition : Int;
+	public var NumExpedition(get, never):Int;
+	function get_NumExpedition() return _numExpedition;
 
 	public var buildingsLevel = 
 	[
@@ -78,6 +82,7 @@ class GameManager extends Game {
 		if(l.identifier == "PlanetExplorationLevel")
 		{
 			initExploration();
+			_numExpedition++;
 			return;
 		}
 		

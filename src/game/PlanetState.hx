@@ -42,6 +42,11 @@ class PlanetState
         var goldEarn = interestPoints[planetGrid[cx][cy]].GetRandomEarn(rand);
         var apEarn = interestPoints[planetGrid[cx][cy]].GetRandomAP(rand);
         
+        if(cast(Game.ME, GameManager).NumExpedition == 1 && goldEarn == 0)
+        {
+            goldEarn = 64;
+        }
+
         PlanetExploration.ME.addGold(goldEarn);
         PlanetExploration.ME.addAP(apEarn);
         

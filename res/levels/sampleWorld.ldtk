@@ -743,7 +743,13 @@
 									"id": "V_String",
 									"params": ["Extractor"]
 								}] },
-								{ "__identifier": "Cost", "__value": [150], "__type": "Array<Int>", "__tile": null, "defUid": 223, "realEditorValues": [{ "id": "V_Int", "params": [150] }] },
+								{ "__identifier": "Cost", "__value": [125,125,125,125,125], "__type": "Array<Int>", "__tile": null, "defUid": 223, "realEditorValues": [
+									{ "id": "V_Int", "params": [125] },
+									{ "id": "V_Int", "params": [125] },
+									{ "id": "V_Int", "params": [125] },
+									{ "id": "V_Int", "params": [125] },
+									{ "id": "V_Int", "params": [125] }
+								] },
 								{ "__identifier": "Description", "__value": "Le extracteur\nSalut", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["Le extracteur\\nSalut"]
@@ -813,7 +819,7 @@
 									"id": "V_String",
 									"params": ["Longue-Vue"]
 								}] },
-								{ "__identifier": "Cost", "__value": [75], "__type": "Array<Int>", "__tile": null, "defUid": 223, "realEditorValues": [{ "id": "V_Int", "params": [75] }] },
+								{ "__identifier": "Cost", "__value": [70,500], "__type": "Array<Int>", "__tile": null, "defUid": 223, "realEditorValues": [ { "id": "V_Int", "params": [70] }, { "id": "V_Int", "params": [500] } ] },
 								{ "__identifier": "Description", "__value": "LongueVue Jumelles le truc", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["LongueVue Jumelles le truc"]
@@ -845,7 +851,7 @@
 									"id": "V_String",
 									"params": ["Analyzer"]
 								}] },
-								{ "__identifier": "Cost", "__value": [700], "__type": "Array<Int>", "__tile": null, "defUid": 223, "realEditorValues": [{ "id": "V_Int", "params": [700] }] },
+								{ "__identifier": "Cost", "__value": [300,300,300,300], "__type": "Array<Int>", "__tile": null, "defUid": 223, "realEditorValues": [ { "id": "V_Int", "params": [300] }, { "id": "V_Int", "params": [300] }, { "id": "V_Int", "params": [300] }, { "id": "V_Int", "params": [300] } ] },
 								{ "__identifier": "Description", "__value": "Le plus cher des batiments", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["Le plus cher des batiments"]
@@ -877,7 +883,7 @@
 									"id": "V_String",
 									"params": ["Radar"]
 								}] },
-								{ "__identifier": "Cost", "__value": [250], "__type": "Array<Int>", "__tile": null, "defUid": 223, "realEditorValues": [{ "id": "V_Int", "params": [250] }] },
+								{ "__identifier": "Cost", "__value": [750], "__type": "Array<Int>", "__tile": null, "defUid": 223, "realEditorValues": [{ "id": "V_Int", "params": [750] }] },
 								{ "__identifier": "Description", "__value": "Le bâtiment des Radars", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["Le bâtiment des Radars"]
