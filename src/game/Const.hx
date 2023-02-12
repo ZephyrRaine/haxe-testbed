@@ -76,5 +76,10 @@ class Const {
 	**/
 	public static var db = ConstDbBuilder.buildVar(["data.cdb", "const.json"]);
 
+
+	////PLASTACOLIN
+	public static final STARTING_AP:Int = 10;
+	public static final INCREMENT_AP:Int = 2;
+
 #end
 }
