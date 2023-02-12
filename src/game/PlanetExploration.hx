@@ -176,7 +176,7 @@ class PlanetExploration extends Entity{
         {
     
         }
-
+        playerEntity.spr.alpha = (Math.sin(game.stime*10)+1)*0.5*0.5+0.25;
         checkEndRun(nf_cx, nf_cy);
     }
 
