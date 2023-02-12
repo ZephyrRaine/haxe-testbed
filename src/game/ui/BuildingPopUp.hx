@@ -4,13 +4,13 @@ import h2d.Tile;
 
 class BuildingPopUp extends ui.win.Menu
 {
-    public function new(name:String, description:String, currentLevel:Int, maxLevel:Int, nextUpgradeCost:Int, yes:Void->Void) {
+    public function new(name:String, description:String, currentLevel:Int, maxLevel:Int, nextUpgradeCost:Int, tile:Tile, yes:Void->Void) {
         super(true);
         this.mask.backgroundTile = Tile.fromColor(0x0,1,1,0.6);
         
         addTitle('$name menu');
         addSpacer();
-        addTile(Assets.tiles.getTile("map_fouilled_1"));
+        addTile(tile);
         addTitle(description);
         addTitle('Level : ($currentLevel/$maxLevel)');
         addSpacer();

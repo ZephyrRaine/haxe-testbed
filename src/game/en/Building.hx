@@ -20,6 +20,7 @@ class Building extends Entity {
     var label : h2d.Text;
 
     var fuckingType : BUILDING_TYPES;
+    var icon : Tile;
 
     public function new(b:Entity_Building) {
         super(b.cx,b.cy);
@@ -32,12 +33,14 @@ class Building extends Entity {
         fuckingType = ANALYZER;
         switch(b.f_BUILDING_TYPE)
         {
-            case "AP" : fuckingType = AP;
+            case "AP" : fuckingType = AP; 
             case "RADAR" : fuckingType = RADAR;
             case "EXTRACTOR" : fuckingType = EXTRACTOR;
             case "ANALYZER": fuckingType = ANALYZER;
             case "SCOPE" : fuckingType = SCOPE;
         }
+        if(b.f_BUILDING_TYPE != "")
+            icon = Assets.tiles.getTile('building_icon_${b.f_BUILDING_TYPE}');
         building_level = cast(game, GameManager).buildingsLevel[fuckingType];
         description = b.f_Description;
 
@@ -89,7 +92,7 @@ class Building extends Entity {
         var nextCost = building_level >= building_costs.length ? -1 : building_costs[building_level];
         var currentGold = cast(game, GameManager).Gold;
 
-        new BuildingPopUp(display_name, description, building_level, building_costs.length, building_costs[building_level], nextCost != -1 && currentGold >= nextCost ? upgrade : null);
+        new BuildingPopUp(display_name, description, building_level, building_costs.length, building_costs[building_level], icon, nextCost != -1 && currentGold >= nextCost ? upgrade : null);
     }
 
     public function getDisplayName() : String {

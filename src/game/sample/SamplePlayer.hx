@@ -89,7 +89,7 @@ class SamplePlayer extends Entity {
 			v.dy = 0;
 			vBump.dy = 0;
 			yr = 1;
-			ca.rumble(0.2, 0.06);
+		//	ca.rumble(0.2, 0.06);
 			onPosManuallyChangedY();
 		}
 
@@ -116,8 +116,8 @@ class SamplePlayer extends Entity {
 			v.dy = -0.85;
 			setSquashX(0.6);
 			cd.unset("recentlyOnGround");
-			fx.dotsExplosionExample(centerX, centerY, 0xffcc00);
-			ca.rumble(0.05, 0.06);
+			// fx.dotsExplosionExample(centerX, centerY, 0xffcc00);
+		//	ca.rumble(0.05, 0.06);
 			hxd.Res.sounds.sfx.Jump.play(false, 0.5);
 		}
 

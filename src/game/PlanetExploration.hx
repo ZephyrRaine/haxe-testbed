@@ -1,3 +1,4 @@
+import ui.PlanetProcess;
 import ui.win.Menu;
 import PlanetState.TILE_TYPE;
 import sample.GameManager;
@@ -53,7 +54,7 @@ class PlanetExploration extends Entity{
     var mapTiles : Array<Array<Entity>>;
 
     var planetInspector : PlanetInspectorWindow;
-
+    var planetProcess : PlanetProcess;
     var gm : GameManager;
 
     public function addGold(value : Int)
@@ -78,7 +79,6 @@ class PlanetExploration extends Entity{
                 hxd.Res.sounds.sfx.AP_Lost.play(false, 0.5);
         }
     }
-
     public function new(state:PlanetState)
     {
         super(0,0);
@@ -91,12 +91,16 @@ class PlanetExploration extends Entity{
 
         hei = planetState.planetSize*16;
         wid = planetState.planetSize*16;
+        
+
         spr.setTexture(h3d.mat.Texture.fromColor(White));
+        
         // spr.set(Tile.fromColor(White,Std.int(wid+8),Std.int(hei+8)));
         spr.setCenterRatio(0,0);
         spr.fitToBox(wid+8,hei+8);
         spr.setPosition(-4,-4);
 
+        planetProcess = new PlanetProcess();
         // spr.setScale(planetState.planetSize/3);
         AP = gm.MaxAP;
 
@@ -134,7 +138,7 @@ class PlanetExploration extends Entity{
          
 		// Camera tracks this
 		// camera.trackEntity(mapTiles[state.startPosX][state.startPosY], true,0.5);
-		camera.trackEntity(playerEntity, true,0.5);
+		camera.trackEntity(mapTiles[planetState.startPosX][planetState.startPosY], true,0.5);
 		camera.clampToLevelBounds = false;
         camera.targetOffX = wid/2;
     //    camera.targetOffY = -hei/2;
@@ -297,6 +301,7 @@ class PlanetExploration extends Entity{
     override function dispose() {
 		super.dispose();
         planetInspector.destroy();
+        planetProcess.destroy();
 	}
 
     function checkEndRun(cx:Int, cy:Int)

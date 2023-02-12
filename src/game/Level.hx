@@ -62,14 +62,20 @@ class Level extends GameChildProcess {
 	function render() {
 		// Placeholder level render
 		root.removeChildren();
+		var background = new h2d.TileGroup(tilesetSource, root);
 
 		var tg = new h2d.TileGroup(tilesetSource, root);
 
+		var front = new h2d.TileGroup(tilesetSource, root);
+		data.l_Background.render(background);
+		
 		var layer = data.l_Collisions;
 		for( autoTile in layer.autoTiles ) {
 			var tile = layer.tileset.getAutoLayerTile(autoTile);
 			tg.add(autoTile.renderX, autoTile.renderY, tile);
 		}
+
+		data.l_Tiles.render(front);
 	}
 
 	override function postUpdate() {

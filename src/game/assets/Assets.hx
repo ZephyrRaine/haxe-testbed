@@ -18,6 +18,7 @@ class Assets {
 	/** LDtk world data **/
 	public static var worldData : World;
 
+	public static var planets: Array<h2d.Tile>;
 
 	static var _initDone = false;
 	public static function init() {
@@ -29,7 +30,7 @@ class Assets {
 		fontPixel = new hxd.res.BitmapFont( hxd.Res.fonts.pixel_unicode_regular_12_xml.entry ).toFont();
 		fontPixelMono = new hxd.res.BitmapFont( hxd.Res.fonts.pixica_mono_regular_16_xml.entry ).toFont();
 		// gameJamFont = new hxd.res.BitmapFont(hxd.Res.fonts.gamejam_font_16_xml.entry).toFont();
-
+		planets = [for (x in 1...17) hxd.Res.loader.load('bg/planets/body/Barren_or_Moon/$x.png').toTile()];
 		// build sprite atlas directly from Aseprite file
 		tiles = dn.heaps.assets.Aseprite.convertToSLib(Const.FPS, hxd.Res.atlas.tiles.toAseprite());
 		hero = dn.heaps.assets.Aseprite.convertToSLib(Const.FPS, hxd.Res.atlas.hero.toAseprite());
