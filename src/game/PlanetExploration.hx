@@ -194,7 +194,7 @@ class PlanetExploration extends Entity{
         else if(ca.isPressed(MoveRight))
             wantedX = 1;
             // playerEntity.setPosCase(playerEntity.cx+1, playerEntity.cy);
-        else if(ca.isPressed(Jump))
+        else if(ca.isPressed(Interact))
             tryDigTile(playerEntity.cx, playerEntity.cy);
     }
 
