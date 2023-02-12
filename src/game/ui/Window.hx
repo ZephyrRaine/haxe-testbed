@@ -45,6 +45,7 @@ class Window extends dn.Process {
 		if( !destroyed ) {
 			destroy();
 			onClose();
+			hxd.Res.sounds.sfx.Popup_Close.play(false, 0.5);
 		}
 	}
 }

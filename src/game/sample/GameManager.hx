@@ -1,5 +1,6 @@
 package sample;
 
+import hxd.res.Sound;
 import VillageManager.VillageHUD;
 import ui.Window;
 
@@ -40,6 +41,8 @@ class GameManager extends Game {
 	public var NumExpedition(get, never):Int;
 	function get_NumExpedition() return _numExpedition;
 
+	public var FirstCaseDigged : Bool;
+
 	public var buildingsLevel = 
 	[
 		BUILDING_TYPES.AP => 0,
@@ -50,7 +53,8 @@ class GameManager extends Game {
 	];
 
 	var villageHUD:VillageHUD;
-
+	var bgm:Sound;
+	
 	public function new() {
 		super();
 
@@ -75,6 +79,9 @@ class GameManager extends Game {
 			Radar = $buildingsLevel[RADAR]\n
 			Analyzer = $buildingsLevel[ANALYZER]');
 		});
+
+		bgm = hxd.Res.sounds.bgm.Village;
+		bgm.play(true, 0.3);
 	}
 
 	override function startLevel(l:World_Level) {
@@ -116,11 +123,18 @@ class GameManager extends Game {
 			villageHUD.destroy();
 
 		startLevel(Assets.worldData.all_levels.PlanetExplorationLevel);
+        hxd.Res.sounds.sfx.Ship_Launch.play(false, 0.6);
+		bgm.stop();
+		bgm = hxd.Res.sounds.bgm.Exploration;
+		bgm.play(true, 0.3);
 	}
 
 	public function switchToVillage()
 	{
 		startLevel(Assets.worldData.all_levels.FirstLevel);
+		bgm.stop();
+		bgm = hxd.Res.sounds.bgm.Village;
+		bgm.play(true, 0.3);
 	}
 
 	function initExploration()

@@ -12,6 +12,7 @@ class ShipPopUp extends ui.win.Menu
         addTitle(description);
         addButton("Yes", yes, true);
         addButton("No", fuckIt, true);
+		hxd.Res.sounds.sfx.Ship_Open.play(false, 0.9);
     }
 
     public function fuckIt()

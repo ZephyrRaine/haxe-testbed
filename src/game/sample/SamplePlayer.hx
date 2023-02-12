@@ -118,6 +118,7 @@ class SamplePlayer extends Entity {
 			cd.unset("recentlyOnGround");
 			fx.dotsExplosionExample(centerX, centerY, 0xffcc00);
 			ca.rumble(0.05, 0.06);
+			hxd.Res.sounds.sfx.Jump.play(false, 0.5);
 		}
 
 		// Walk
