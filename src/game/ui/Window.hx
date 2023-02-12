@@ -1,7 +1,11 @@
 package ui;
 
+import ase.types.ColorDepth;
+
 class Window extends dn.Process {
 	public var win: h2d.Flow;
+
+	var closeSound = hxd.Res.sounds.sfx.Popup_Close;
 
 	public function new(?p:dn.Process) {
 		super(p==null ? App.ME : p);
@@ -45,7 +49,8 @@ class Window extends dn.Process {
 		if( !destroyed ) {
 			destroy();
 			onClose();
-			hxd.Res.sounds.sfx.Popup_Close.play(false, 0.5);
+			closeSound.stop();
+			closeSound.play(false, 0.5);
 		}
 	}
 }

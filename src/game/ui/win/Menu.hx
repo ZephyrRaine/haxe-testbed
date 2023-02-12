@@ -11,6 +11,8 @@ typedef MenuItem = {
 }
 
 class Menu extends ui.Modal {
+	var uiHoverSound = hxd.Res.sounds.sfx.UI_Move;
+
 	var useMouse : Bool;
 	var labelPadLen = 24;
 
@@ -45,7 +47,8 @@ class Menu extends ui.Modal {
 		if( curIdx!=v )
 		{
 			invalidateCursor();
-			hxd.Res.sounds.sfx.UI_Move.play(false, 1.0);
+			uiHoverSound.stop();
+			uiHoverSound.play(false, 1.0);
 		}
 		return curIdx = v;
 	}

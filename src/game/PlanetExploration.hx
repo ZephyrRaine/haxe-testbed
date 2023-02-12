@@ -16,6 +16,8 @@ enum TILE_STATUS
 class PlanetExploration extends Entity{
 	public static var ME : PlanetExploration;
 
+    var moveSound = hxd.Res.sounds.sfx.Explore_Move;
+
 	var notifTw : dn.Tweenie;
     var _gold : Int = 0;
 	var _ap : Int;
@@ -202,7 +204,8 @@ class PlanetExploration extends Entity{
     {
         if((wantedX != 0 || wantedY != 0) && tryMove(playerEntity.cx+wantedX, playerEntity.cy+wantedY))
         {
-            hxd.Res.sounds.sfx.Explore_Move.play(false, 0.4);
+            moveSound.stop();
+            moveSound.play(false, 0.4);
         }
         playerEntity.spr.alpha = (Math.sin(game.stime*10)+1)*0.5*0.5+0.25;
         checkEndRun(nf_cx, nf_cy);
@@ -292,6 +295,7 @@ class PlanetExploration extends Entity{
             }
 
         canMove = false;
+        hxd.Res.sounds.sfx.Explore_Digging.play(false, 0.5);
         planetInspector.DigNow(
 
             ()->
