@@ -12,6 +12,7 @@ typedef MenuItem = {
 class Menu extends ui.Modal {
 	var useMouse : Bool;
 	var labelPadLen = 24;
+	var fontUI : h2d.Font = hxd.Res.fonts.MatchupPro.toFont();
 
 	var curIdx(default,set) = 0;
 	public var cur(get,never) : Null<MenuItem>; inline function get_cur() return items.get(curIdx);
@@ -19,7 +20,7 @@ class Menu extends ui.Modal {
 	var cursor : h2d.Bitmap;
 	var cursorInvalidated = true;
 
-	public function new(useMouse=true) {
+	public function new(useMouse=true) { 
 		super(App.ME);
 
 		this.useMouse = useMouse;
@@ -28,7 +29,6 @@ class Menu extends ui.Modal {
 		win.verticalSpacing = 0;
 		win.horizontalAlign = Left;
 		win.backgroundTile = Assets.tiles.getTile("ui_border");
-		
 
 		mask.enableInteractive = useMouse;
 		if( useMouse ) {
@@ -77,7 +77,7 @@ class Menu extends ui.Modal {
 		if( items.allocated>0 )
 			f.paddingTop = 6;
 
-		var tf = new h2d.Text(Assets.fontPixelMono, f);
+		var tf = new h2d.Text(fontUI, f);
 		tf.textColor = Col.coldGray(0.6);
 		tf.text = str;
 //		tf.text = Lib.padRight(str.toUpperCase(), labelPadLen, "_");
@@ -89,7 +89,7 @@ class Menu extends ui.Modal {
 		f.paddingBottom = 4;
 
 		// Label
-		var tf = new h2d.Text(Assets.fontPixelMono, f);
+		var tf = new h2d.Text(fontUI, f);
 		tf.textColor = Black;
 		tf.text = label;
 

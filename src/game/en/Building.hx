@@ -21,6 +21,8 @@ class Building extends Entity {
 
     var fuckingType : BUILDING_TYPES;
 
+    var fontBuilding : h2d.Font = hxd.Res.fonts.FutilePro.toFont();
+
     public function new(b:Entity_Building) {
         super(b.cx,b.cy);
 
@@ -46,7 +48,7 @@ class Building extends Entity {
 
         var bg = new h2d.Bitmap(Assets.tiles.getTile("ui_border_3"));
 
-        label = new h2d.Text(Assets.fontPixel, bg);
+        label = new h2d.Text(fontBuilding, bg);
         label.filter = new dn.heaps.filter.PixelOutline();
         label.text = getDisplayName();
         label.textColor = White;
