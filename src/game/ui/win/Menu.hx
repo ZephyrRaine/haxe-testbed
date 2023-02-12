@@ -27,6 +27,7 @@ class Menu extends ui.Modal {
 		win.padding = 10;
 		win.enableInteractive = useMouse;
 		win.verticalSpacing = 0;
+		win.horizontalAlign = Left;
 		win.backgroundTile = Assets.tiles.getTile("ui_border");
 		
 
@@ -88,7 +89,7 @@ class Menu extends ui.Modal {
 		// Label
 		var tf = new h2d.Text(Assets.fontPixelMono, f);
 		tf.textColor = Black;
-		tf.text = Lib.padRight(label, labelPadLen);
+		tf.text = label;
 
 		var i : MenuItem = { f:f, tf:tf, cb:cb, close:close }
 		items.push(i);
