@@ -43,11 +43,11 @@ class Building extends Entity {
         fuckingType = ANALYZER;
         switch(b.f_BUILDING_TYPE)
         {
-            case "AP" : fuckingType = AP; merchantAI = new en.Merchant(Assets.merchant, 0.4, cx, cy);
-            case "RADAR" : fuckingType = RADAR; merchantAI = new en.Merchant(Assets.smallDroid, 0.53, cx, cy);
-            case "EXTRACTOR" : fuckingType = EXTRACTOR; merchantAI = new en.Merchant(Assets.mudGuard, 0.39, cx, cy);
-            case "ANALYZER": fuckingType = ANALYZER; merchantAI = new en.Merchant(Assets.redDude, 0.475, cx, cy);
-            case "SCOPE" : fuckingType = SCOPE; merchantAI = new en.Merchant(Assets.totemDude, 0.53, cx, cy);
+            case "AP" : fuckingType = AP; merchantAI = new en.Merchant(Assets.merchant, 0.4, cx, cy, 3);
+            case "RADAR" : fuckingType = RADAR; merchantAI = new en.Merchant(Assets.smallDroid, 0.53, cx, cy, 3);
+            case "EXTRACTOR" : fuckingType = EXTRACTOR; merchantAI = new en.Merchant(Assets.mudGuard, 0.39, cx, cy, 3);
+            case "ANALYZER": fuckingType = ANALYZER; merchantAI = new en.Merchant(Assets.redDude, 0.475, cx, cy, 2);
+            case "SCOPE" : fuckingType = SCOPE; merchantAI = new en.Merchant(Assets.totemDude, 0.53, cx, cy, 3);
         }
         if(b.f_BUILDING_TYPE != "")
             icon = Assets.tiles.getTile('building_icon_${b.f_BUILDING_TYPE}');

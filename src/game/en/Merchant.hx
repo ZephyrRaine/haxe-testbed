@@ -2,19 +2,31 @@ package en;
 
 class Merchant extends Entity {
 	var walkSpeed = 0.;
+    
+    var minDelayMove = 4.0;
+    var maxDelayMove = 12.0;
+    var minDurationMove = 0.5;
+    var maxDurationMove = 2.0;
+    var minClampX : Int;
+    var maxClampX : Int;
+    var timerMove = 0.;
+    var moveDir = 0;
 
 	var onGround(get,never) : Bool;
 		inline function get_onGround() return !destroyed && v.dy==0 && yr==1 && level.hasCollision(cx,cy+1);
 
-	public function new(sprLib:SpriteLib, xCenter:Float, xPos:Int, yPos:Int) {
-		super(xPos,yPos);
+	public function new(_sprLib:SpriteLib, _xCenter:Float, _xPos:Int, _yPos:Int, _clampX:Int) {
+		super(_xPos,_yPos);
 
 		// Misc inits
 		v.setFricts(0.84, 0.94);
 
+        minClampX = _xPos - _clampX;
+        maxClampX = _xPos + _clampX;
+
 		// Player
-		spr.set(sprLib);
-		spr.setCenterRatio(xCenter, 1.0);
+		spr.set(_sprLib);
+		spr.setCenterRatio(_xCenter, 1.0);
 
 		spr.anim.registerStateAnim("idle", 0, 1.0);
 		spr.anim.registerStateAnim("run", 5, 1.0, ()->walkSpeed!=0.0);
@@ -33,14 +45,20 @@ class Merchant extends Entity {
 	override function preUpdate() {
 		super.preUpdate();
 
+        timerMove -= tmod;
+        if( timerMove<=0. ) {
+            UpdateMoveState();
+        }
+
 		walkSpeed = 0;
 		if( onGround )
 			cd.setS("recentlyOnGround",0.1); // allows "just-in-time" jumps
 
 		// Walk
-		// if( ca.getAnalogDist2(MoveLeft,MoveRight)>0 ) {
-		// 	// As mentioned above, we don't touch physics values (eg. `dx`) here. We just store some "requested walk speed", which will be applied to actual physics in fixedUpdate.
-		// 	walkSpeed = ca.getAnalogValue2(MoveLeft,MoveRight); // -1 to 1
+		if( moveDir != 0 ) {
+			// As mentioned above, we don't touch physics values (eg. `dx`) here. We just store some "requested walk speed", which will be applied to actual physics in fixedUpdate.
+			walkSpeed = moveDir; // -1 to 1
+        }
     }
 
 
@@ -52,11 +70,28 @@ class Merchant extends Entity {
 			v.dy+=0.05;
 
 		// Apply requested walk movement
-		if( walkSpeed!=0 )
-			v.dx += walkSpeed * 0.045; // some arbitrary speed
+		if( walkSpeed != 0 )
+			v.dx += walkSpeed * 0.0040; // some arbitrary speed
 
+
+        
 		set_dir(Std.int(walkSpeed));
 
-		
+		if((cx <= minClampX && moveDir < 0)|| (cx >= maxClampX && moveDir > 0))
+            moveDir = -moveDir;
 	}
+
+    private function UpdateMoveState()
+    {
+        if(moveDir == 0)
+        {
+            moveDir = dn.Lib.irnd(0,1) * 2 - 1;
+            timerMove = dn.Lib.rnd(minDurationMove, maxDurationMove) * 100;
+        }
+        else
+        {
+            moveDir = 0;
+            timerMove = dn.Lib.rnd(minDelayMove, maxDelayMove) * 100;
+        }
+    }
 }
