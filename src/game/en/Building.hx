@@ -14,6 +14,10 @@ class Building extends Entity {
     var description : String;
     var building_level : Int;
     var building_costs : Array<Int>;
+
+
+    var label : h2d.Text;
+
     var fuckingType : BUILDING_TYPES;
 
     public function new(b:Entity_Building) {
@@ -38,10 +42,37 @@ class Building extends Entity {
 
         building_costs = b.f_Cost; 
         spr.useCustomTile(b.getTile());
+
+        var bg = new h2d.Bitmap(Assets.tiles.getTile("ui_border_3"));
+
+        label = new h2d.Text(Assets.fontPixel, bg);
+        label.filter = new dn.heaps.filter.PixelOutline();
+        label.text = getDisplayName();
+        label.textColor = White;
+        bg.setPosition( Std.int((cx+xr)*Const.GRID -label.textWidth*0.5), Std.int((cy-1+yr)*Const.GRID -label.textHeight-3));
+        bg.width = label.textWidth +10;
+        bg.height = 5;
+        label.setPosition(5, -label.textHeight-2);
+        
+        bg.visible = false;
+
+        game.scroller.add(bg, Const.DP_UI);
+    }
+
+    override function postUpdate()
+    {
+        super.postUpdate();
+        label.parent.setPosition( Std.int((cx+xr)*Const.GRID -label.textWidth*0.5), ((cy-1+yr)*Const.GRID -label.textHeight-3 - 2*Math.sin(game.stime*3))); 
+    }
+
+    public function showLabel(show:Bool)
+    {
+        label.parent.visible = show;
     }
 
     override function dispose() {
 		super.dispose();
+        label.parent.remove();
 		ALL.remove(this);
 	}
 

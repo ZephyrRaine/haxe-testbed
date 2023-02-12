@@ -145,6 +145,8 @@ class SamplePlayer extends Entity {
 		
 	}
 
+	var currentBuilding:Building;
+
 	function checkEntities()
 	{
 		var currentShip = en.Ship.Instance;
@@ -161,7 +163,11 @@ class SamplePlayer extends Entity {
 		}
 		else
 		{
-			var currentBuilding = null;
+			
+			if(currentBuilding != null)
+				currentBuilding.showLabel(false);
+			
+			currentBuilding = null;
 
 			for(b in en.Building.ALL)
 			{
@@ -171,10 +177,13 @@ class SamplePlayer extends Entity {
 				}
 			}
 
+
+
 			if(currentBuilding != null)
 			{
-				interactTooltip.visible = true;
-				hud.debug(currentBuilding.getDisplayName());
+			//	interactTooltip.visible = true;
+			//	hud.debug(currentBuilding.getDisplayName());
+				currentBuilding.showLabel(true);
 				if(ca.isPressed(Interact))
 				{
 					interactTooltip.visible = false;

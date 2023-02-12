@@ -15,6 +15,7 @@ class Window extends dn.Process {
 		win.borderHeight = 7;
 		win.layout = Vertical;
 		win.verticalSpacing = 2;
+		win.horizontalAlign = Middle;
 
 		dn.Process.resizeAll();
 	}

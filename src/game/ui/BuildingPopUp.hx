@@ -9,8 +9,12 @@ class BuildingPopUp extends ui.win.Menu
         this.mask.backgroundTile = Tile.fromColor(0x0,1,1,0.6);
         
         addTitle('$name menu');
+        addSpacer();
+        addTile(Assets.tiles.getTile("map_fouilled_1"));
         addTitle(description);
         addTitle('Level : ($currentLevel/$maxLevel)');
+        addSpacer();
+
 		if(yes != null) addButton('Upgrade ($nextUpgradeCost gold)', yes, true);
         else addTitle(nextUpgradeCost > 0 ? 'Next Upgrade : $nextUpgradeCost gold' : 'Maxed Out!');
         addButton("Close", fuckIt, true);
