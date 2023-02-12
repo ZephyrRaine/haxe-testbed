@@ -9,8 +9,9 @@ class Assets {
 	// Fonts
 	public static var fontPixel : h2d.Font;
 	public static var fontPixelMono : h2d.Font;
-	public static var gameJamFont : h2d.Font;
-
+	public static var spaceFont : h2d.Font;
+	public static var titleFont : h2d.Font;
+	public static var menuFont : h2d.Font;
 	/** Main atlas **/
 	public static var tiles : SpriteLib;
 	public static var hero : SpriteLib;
@@ -29,6 +30,12 @@ class Assets {
 		// Fonts
 		fontPixel = new hxd.res.BitmapFont( hxd.Res.fonts.pixel_unicode_regular_12_xml.entry ).toFont();
 		fontPixelMono = new hxd.res.BitmapFont( hxd.Res.fonts.pixica_mono_regular_16_xml.entry ).toFont();
+		spaceFont = new hxd.res.BitmapFont( hxd.Res.fonts.ExpressionPro.entry ).toFont();
+		titleFont = new hxd.res.BitmapFont( hxd.Res.fonts.FutilePro.entry ).toFont();
+		menuFont = new hxd.res.BitmapFont( hxd.Res.fonts.MatchupPro.entry ).toFont();
+
+
+
 		// gameJamFont = new hxd.res.BitmapFont(hxd.Res.fonts.gamejam_font_16_xml.entry).toFont();
 		planets = [for (x in 1...17) hxd.Res.loader.load('bg/planets/body/Barren_or_Moon/$x.png').toTile()];
 		// build sprite atlas directly from Aseprite file

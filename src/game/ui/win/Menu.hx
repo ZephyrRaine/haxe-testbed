@@ -1,5 +1,6 @@
 package ui.win;
 
+import dn.heaps.filter.PixelOutline;
 import h2d.Tile;
 import dn.heaps.Sfx;
 typedef MenuItem = {
@@ -12,7 +13,6 @@ typedef MenuItem = {
 class Menu extends ui.Modal {
 	var useMouse : Bool;
 	var labelPadLen = 24;
-	var fontUI : h2d.Font = hxd.Res.fonts.MatchupPro.toFont();
 
 	var curIdx(default,set) = 0;
 	public var cur(get,never) : Null<MenuItem>; inline function get_cur() return items.get(curIdx);
@@ -71,14 +71,30 @@ class Menu extends ui.Modal {
 			var t = new h2d.Bitmap(tile, f);
 		}
 
-	public function addTitle(str:String) {
+	public function addTileTitled(str:String, tile:Tile)
+	{
+		var f = new h2d.Flow(win);
+		f.padding = 2;
+		f.layout = Horizontal;
+		f.verticalAlign = Middle;
+		f.horizontalSpacing = 10;
+		var t = new h2d.Bitmap(tile, f);
+		var tf = new h2d.Text(Assets.titleFont, f);
+		tf.textColor = Col.white();
+		tf.filter = new PixelOutline();
+		tf.text = str;
+	}
+
+	public function addTitle(str:String, realTitle:Bool = false) {
 		var f = new h2d.Flow(win);
 		f.padding = 2;
 		if( items.allocated>0 )
 			f.paddingTop = 6;
 
-		var tf = new h2d.Text(fontUI, f);
-		tf.textColor = Col.coldGray(0.6);
+		var tf = new h2d.Text(realTitle?Assets.titleFont:Assets.menuFont, f);
+		if(realTitle)
+			tf.filter = new PixelOutline();
+		tf.textColor = realTitle ? Col.white() : Col.black();
 		tf.text = str;
 //		tf.text = Lib.padRight(str.toUpperCase(), labelPadLen, "_");
 	}
@@ -89,7 +105,7 @@ class Menu extends ui.Modal {
 		f.paddingBottom = 4;
 
 		// Label
-		var tf = new h2d.Text(fontUI, f);
+		var tf = new h2d.Text(Assets.spaceFont, f);
 		tf.textColor = Black;
 		tf.text = label;
 

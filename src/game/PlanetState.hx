@@ -308,7 +308,7 @@ private class InterestPoint
             return analyzerInfos;
         
         var goldChance = analyzerLevel >= 1 ? '$chanceEarn%' : "???";
-        var goldRange = analyzerLevel >= 3 ? '$minEarn - $maxEarn' : "??? - ???";
+        var goldRange = analyzerLevel >= 3 ? '${minEarn}g- ${maxEarn}g' : "??g - ??g";
         var apChance = analyzerLevel >= 2 ? '$chancePA%' : "???";
         var apRange = analyzerLevel >= 4 ? '$numPA AP' : "?? AP";
 

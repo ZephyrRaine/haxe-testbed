@@ -8,11 +8,12 @@ class BuildingPopUp extends ui.win.Menu
         super(true);
         this.mask.backgroundTile = Tile.fromColor(0x0,1,1,0.6);
         
-        addTitle('$name menu');
+        addTileTitled('$name - lvl.$currentLevel', tile);
         addSpacer();
-        addTile(tile);
+
         addTitle(description);
-        addTitle('Level : ($currentLevel/$maxLevel)');
+        // addTitle('Level : ($currentLevel/$maxLevel)');
+        addSpacer();
         addSpacer();
 
 		if(yes != null) addButton('Upgrade ($nextUpgradeCost gold)', yes, true);

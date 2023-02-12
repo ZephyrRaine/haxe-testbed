@@ -16,7 +16,7 @@ class PlanetInspectorWindow extends Window
         win.padding = 10;
         win.layout = Vertical;
         win.backgroundTile = Assets.tiles.getTile("ui_border_2");
-        win.setPosition((w()- 100)/Const.UI_SCALE , 50/Const.UI_SCALE);
+       // win.setPosition((w()- 100)/Const.UI_SCALE , 50/Const.UI_SCALE);
         var f = new h2d.Flow(win);
         win.horizontalAlign = Right;
 		win.minWidth = 150;
@@ -24,21 +24,21 @@ class PlanetInspectorWindow extends Window
         f.padding = 2;
 
 
-        title = new h2d.Text(Assets.fontPixel, f);
+        title = new h2d.Text(Assets.titleFont, f);
         title.textColor = Col.white();
         title.text = "Salut";
 
         var f = new h2d.Flow(win);
 		f.padding = 2;
 
-        description = new h2d.Text(Assets.fontPixelMono, f);
-        description.textColor = Col.white();
+        description = new h2d.Text(Assets.menuFont, f);
+        description.textColor = Col.fromInt(0xbbbbbb);
         description.text = "A barren land.";
         
         var f = new h2d.Flow(win);
 		f.padding = 2;
 
-        action = new h2d.Text(Assets.fontPixelMono, f);
+        action = new h2d.Text(Assets.menuFont, f);
         action.textColor = Col.white();
         action.text = "Space - Dig (1AP)";
 
@@ -46,10 +46,11 @@ class PlanetInspectorWindow extends Window
 		f.padding = 2;
 
         analyzer = new h2d.Text(Assets.fontPixelMono, f);
-        analyzer.textColor = Col.green();
+        analyzer.textColor = Col.fromInt(0x95b89d);
         analyzer.text = '';
+        analyzer.textAlign = Right;
 
-        variablesText = new h2d.Text(Assets.fontPixel, root);
+        variablesText = new h2d.Text(Assets.menuFont, root);
 		variablesText.filter = new dn.heaps.filter.PixelOutline();
 		updateHUD(0,0);
 		dn.Process.resizeAll();
@@ -64,7 +65,7 @@ class PlanetInspectorWindow extends Window
 		var w = M.ceil( w()/Const.UI_SCALE );
 		var h = M.ceil( h()/Const.UI_SCALE );
 		win.x = Std.int( w - (win.outerWidth +20));
-		win.y = Std.int( h*0.5);
+		win.y = Std.int( 20);
 	}
 
 
