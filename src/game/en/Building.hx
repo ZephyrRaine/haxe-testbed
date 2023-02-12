@@ -10,8 +10,11 @@ class Building extends Entity {
 
 	public static var ALL : Array<Building> = [];
 
-    public var name : String;
-
+    var display_name : String;
+    var description : String;
+    var building_level : Int;
+    var building_costs : Array<Int>;
+    var fuckingType : BUILDING_TYPES;
 
     public function new(b:Entity_Building) {
         super(b.cx,b.cy);
@@ -20,7 +23,20 @@ class Building extends Entity {
 
         set_wid(b.width);
         set_hei(b.height);
-        name = b.f_Name;
+        display_name = b.f_DisplayName;
+        fuckingType = ANALYZER;
+        switch(b.f_BUILDING_TYPE)
+        {
+            case "AP" : fuckingType = AP;
+            case "RADAR" : fuckingType = RADAR;
+            case "EXTRACTOR" : fuckingType = EXTRACTOR;
+            case "ANALYZER": fuckingType = ANALYZER;
+            case "SCOPE" : fuckingType = SCOPE;
+        }
+        building_level = cast(game, GameManager).buildingsLevel[fuckingType];
+        description = b.f_Description;
+
+        building_costs = b.f_Cost; 
         spr.useCustomTile(b.getTile());
     }
 
@@ -30,20 +46,25 @@ class Building extends Entity {
 	}
 
 	public function displayPopUp() {
-        new BuildingPopUp(name, getYesAction(), 
-        ()->{
-            hud.notify("Clicked no");
-        });
+
+        var nextCost = building_level >= building_costs.length ? -1 : building_costs[building_level];
+        var currentGold = cast(game, GameManager).Gold;
+
+        new BuildingPopUp(display_name, description, building_level, building_costs.length, building_costs[building_level], nextCost != -1 && currentGold >= nextCost ? upgrade : null);
     }
 
-    public function getYesAction() : Void->Void
-    {
-        switch(name)
-        {
-            case "Ship":
-                return ()->{cast(Game.ME, GameManager).switchToExploration();};
-        }
+    public function getDisplayName() : String {
+        return display_name + " - lvl. " + building_level;
+    }
 
-        return ()->hud.notify("Clicked yes");
+    public function upgrade()
+    {
+        if(building_level >= building_costs.length)
+            return;
+
+        var nextCost = building_costs[building_level];
+        cast(game,GameManager).addPermanentGold(-nextCost);
+        building_level++;
+        cast(game,GameManager).buildingsLevel[fuckingType] = building_level;
     }
 }

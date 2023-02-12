@@ -1,5 +1,6 @@
 package sample;
 
+import VillageManager.VillageHUD;
 import ui.Window;
 
 
@@ -23,11 +24,17 @@ class GameManager extends Game {
 		return Const.STARTING_AP + Std.int(buildingsLevel[AP]) * Const.INCREMENT_AP;
 	  }
 
-	public var gold:Int = 0;
-	public var villageHUD:Window;
-	var variablesText : h2d.Text;
-
-
+	  var _gold : Int;
+	  public var Gold(get, set):Int;
+  
+	  function get_Gold() return _gold;
+	  function set_Gold(v) {
+	   if(v <= 0) v = 0;
+  
+		_gold = v;
+		updateHUD(Gold);
+		return _gold;
+	  }
 
 	public var buildingsLevel = 
 	[
@@ -38,6 +45,8 @@ class GameManager extends Game {
 		BUILDING_TYPES.ANALYZER => 0,
 	];
 
+	var villageHUD:VillageHUD;
+
 	public function new() {
 		super();
 
@@ -46,6 +55,21 @@ class GameManager extends Game {
 		
 		Console.ME.add("set_building_level", (name,value)->{
 			buildingsLevel[name] = value;
+		});
+
+		Console.ME.add("give_gold", (value)->
+		{
+			Gold += value;
+		});
+
+		Console.ME.add("print_building_levels", ()->
+		{
+			Console.ME.clearAndLog('
+			AP = $buildingsLevel[AP]\n
+			Scope = $buildingsLevel[SCOPE]\n
+			Extractor = $buildingsLevel[EXTRACTOR]\n
+			Radar = $buildingsLevel[RADAR]\n
+			Analyzer = $buildingsLevel[ANALYZER]');
 		});
 	}
 
@@ -66,22 +90,23 @@ class GameManager extends Game {
 		
 		new SamplePlayer();
 
-		villageHUD = new ui.Window();
-		
-        variablesText = new h2d.Text(Assets.fontPixel, root);
-		variablesText.filter = new dn.heaps.filter.PixelOutline();
-		updateHUD(0,0);
+		villageHUD = new VillageHUD();
+		updateHUD(Gold);
 	}
 
 	
-    public function updateHUD(gold:Int, AP:Int)
+    public function updateHUD(gold:Int)
     {
-        variablesText.text = 'g:$gold - ap:$AP';
+		if(villageHUD != null)
+			villageHUD.updateGold(gold);
     }
     
 
 	public function switchToExploration()
 	{
+		if(villageHUD != null)
+			villageHUD.destroy();
+
 		startLevel(Assets.worldData.all_levels.PlanetExplorationLevel);
 	}
 
@@ -92,14 +117,12 @@ class GameManager extends Game {
 
 	function initExploration()
 	{
-		trace("salut");
-
 		var state = new PlanetState(5);
 		new PlanetExploration(state);
 	}
 
-	public function addPermanentGold(_gold:Int) {
-		gold += _gold;
+	public function addPermanentGold(g:Int) {
+		Gold += g;
 	}
 }
 

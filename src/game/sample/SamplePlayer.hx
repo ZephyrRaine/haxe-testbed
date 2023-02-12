@@ -159,7 +159,7 @@ class SamplePlayer extends Entity {
 		if(currentBuilding != null)
 		{
 			interactTooltip.visible = true;
-			hud.debug(currentBuilding.name);
+			hud.debug(currentBuilding.getDisplayName());
 			if(ca.isPressed(MenuOk))
 			{
 				interactTooltip.visible = false;
