@@ -34,7 +34,6 @@ class PlanetExploration extends Entity{
         if(v < 0)
         {
             v = 0;
-            triggerEndRun(true);
         } 
         if(v > gm.MaxAP)
     		v = gm.MaxAP;
@@ -109,6 +108,9 @@ class PlanetExploration extends Entity{
         playerEntity = new Entity(state.startPosX,state.startPosY);
         playerEntity.spr.set(AssetsDictionaries.tiles.map_player);
 
+        nf_cx = state.startPosX;
+        nf_cy = state.startPosY;
+
         updateTileInspector(state.startPosX, state.startPosY);
 
         Console.ME.add("reveal", ()->
@@ -125,6 +127,9 @@ class PlanetExploration extends Entity{
 
     var wantedX:Int = 0;
     var wantedY:Int = 0;
+
+    var nf_cx:Int =0;
+    var nf_cy:Int = 0;
 
     override function preUpdate() 
     {
@@ -154,6 +159,8 @@ class PlanetExploration extends Entity{
         {
     
         }
+
+        checkEndRun(nf_cx, nf_cy);
     }
 
     function updateTileInspector(cx:Int, cy:Int)
@@ -175,6 +182,10 @@ class PlanetExploration extends Entity{
         revealTiles(ncx, ncy, gm.buildingsLevel[SCOPE]);
 
         updateTileInspector(ncx, ncy);
+        
+        //PRE-SHOT FUCKING FRAME BULLSHIT
+        nf_cx=ncx;
+        nf_cy=ncy;
 
         return true;
     }
@@ -258,6 +269,12 @@ class PlanetExploration extends Entity{
         planetInspector.destroy();
 	}
 
+    function checkEndRun(cx:Int, cy:Int)
+    {
+        if(AP <= 0)
+            triggerEndRun(cx != planetState.startPosX || cy != planetState.startPosY);
+    }
+
     function triggerEndRun(lost:Bool)
     {
         var m = new Menu();
@@ -266,7 +283,7 @@ class PlanetExploration extends Entity{
             Gold = Std.int(Gold * (gm.buildingsLevel[EXTRACTOR] * 0.1));
 
         gm.addPermanentGold(Gold);
-
+        m.addTitle(lost?"FAILURE":"SUCCESS");
         m.addTitle("You're coming home");
         m.addTitle('With $Gold gold');
         m.addButton("Ok", gm.switchToVillage,true);
