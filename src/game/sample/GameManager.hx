@@ -6,22 +6,47 @@ import ui.Window;
 /**
 	This small class just creates a SamplePlayer instance in current level
 **/
+
+enum abstract BUILDING_TYPES(String)
+{
+	var AP;
+	var SCOPE;
+	var EXTRACTOR;
+	var RADAR;
+	var ANALYZER;
+}
+
 class GameManager extends Game {
-	public var maxAP:Int = 13;
+	public var MaxAP(get,never):Int;
+
+	function get_MaxAP():Int {
+		return Const.STARTING_AP + Std.int(buildingsLevel[AP]) * Const.INCREMENT_AP;
+	  }
+
 	public var gold:Int = 0;
 	public var villageHUD:Window;
 	var variablesText : h2d.Text;
 
-	public var scopeLevel = 0;
-	public var extractorLevel = 0;
-	public var radarLevel = 0;
-	public var analyzerLevel = 0;
+
+
+	public var buildingsLevel = 
+	[
+		BUILDING_TYPES.AP => 0,
+		BUILDING_TYPES.SCOPE => 0,
+		BUILDING_TYPES.EXTRACTOR => 0,
+		BUILDING_TYPES.RADAR => 0,
+		BUILDING_TYPES.ANALYZER => 0,
+	];
 
 	public function new() {
 		super();
 
 		//switchToExploration();
 		Console.ME.add("exploration",switchToExploration);
+		
+		Console.ME.add("set_building_level", (name,value)->{
+			buildingsLevel[name] = value;
+		});
 	}
 
 	override function startLevel(l:World_Level) {

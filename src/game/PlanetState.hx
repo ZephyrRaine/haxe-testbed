@@ -1,6 +1,8 @@
 import sample.GameManager;
 import dn.Rand;
 
+typedef InspectorPayload = { title : String, description : String, action : String, analyzer : String }
+
 enum abstract TILE_TYPE(Int) from Int to Int
 {
     var VIDE;
@@ -27,7 +29,7 @@ class PlanetState
 
     public function new(_planetSize:Int)
     {
-        Init(_planetSize, cast(Game.ME, GameManager).maxAP);
+        Init(_planetSize, cast(Game.ME, GameManager).MaxAP);
 
         GenerateBasicPoints();
         GenerateInterestPoints();
@@ -70,6 +72,45 @@ class PlanetState
                 log = 'You earn $goldEarn golds and $apEarn AP.';
         }
         return log;
+    }
+
+    public function inspectCase(cx:Int, cy:Int, analyzerLevel:Int) : InspectorPayload
+    {
+        var ip :InspectorPayload = {title:"",description:"",action: "",analyzer: ""};
+        var caseType = planetGrid[cx][cy];
+        ip.action = "Space - Dig (1AP)";
+
+        switch(caseType)
+        {
+            case VIDE:
+                ip.title = "Empty";
+                ip.description = "Nothing to see here";
+            case SHIP:
+                ip.title = "Ship";
+                ip.description = "Your beloved ship";
+                ip.action = "Space - Return Home (0AP)"; 
+            case CREVASSE:
+                ip.title = "Crevasse";
+                ip.description = "A bottomless pit";
+            case WRECK:
+                ip.title = "Wreck";
+                ip.description = "Someone was less lucky than you";
+            case VILLAGE:
+                ip.title = "Village";
+                ip.description = "People used to live here?!";
+            case ORE:
+                ip.title = "Ore";
+                ip.description = "A shiny rock";
+            case PLANT:
+                ip.title = "Plant";
+                ip.description = "You can't eat this";
+            case CORPSE:
+                ip.title = "Corpsed";
+                ip.description = "Kinda horrible";
+        }
+        ip.analyzer = interestPoints[caseType].GetAnalyzerInfos(analyzerLevel);
+
+        return ip;
     }
 
     private function Init(_planetSize : Int, maxAP : Int)
@@ -170,8 +211,18 @@ private class InterestPoint
         this.numPA = numPA;
     }
 
-    public function GetAnalyzerInfos(analyzerLevel : Int)
+    public function GetAnalyzerInfos(analyzerLevel : Int) : String
     {
-        //ToDo
+        var analyzerInfos = "";
+        if(analyzerLevel <= 0)
+            return analyzerInfos;
+        
+        var goldChance = analyzerLevel >= 1 ? '$chanceEarn%' : "???";
+        var goldRange = analyzerLevel >= 3 ? '$minEarn - $maxEarn' : "??? - ???";
+        var apChance = analyzerLevel >= 2 ? '$chancePA%' : "???";
+        var apRange = analyzerLevel >= 4 ? '$numPA AP' : "?? AP";
+
+        analyzerInfos = 'Chance of gold : ${goldChance} (${goldRange}) - Chance of AP : ${apChance} (${apRange})';
+        return analyzerInfos;
     }
 }
