@@ -90,12 +90,7 @@ class Building extends Entity {
 
         this.spr.colorize(building_level==0 ? Col.coldGray(0.05) : Col.white());
         this.spr.alpha = building_level==0 ? 0.9 : 1.0;
-
-        if(building_level == building_costs.length)
-        {
-            //ON ACTIVE LE PERSONNAGE ICI !!!!
-        }
-        
+        merchantAI.entityVisible = building_level == building_costs.length;        
     }
 
     override function postUpdate()
