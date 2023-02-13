@@ -34,10 +34,14 @@ class GameManager extends Game {
 
 	_gold = v;
 	updateHUD(Gold);
+	for(b in en.Building.ALL)
+	{
+			b.displayCanBuy();
+	}
 	return _gold;
 	}
 
-	var _numExpedition : Int;
+	var _numExpedition : Int = 0;
 	public var NumExpedition(get, never):Int;
 	function get_NumExpedition() return _numExpedition;
 

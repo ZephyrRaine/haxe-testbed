@@ -115,7 +115,7 @@ class PlanetState
                 ip.title = "Plant";
                 ip.description = "You can't eat this";
             case CORPSE:
-                ip.title = "Corpsed";
+                ip.title = "Corpse";
                 ip.description = "Kinda horrible";
         }
         ip.analyzer = interestPoints[caseType].GetAnalyzerInfos(analyzerLevel, extractorLevel);
