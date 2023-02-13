@@ -37,7 +37,7 @@ class GameManager extends Game {
 	return _gold;
 	}
 
-	var _numExpedition : Int;
+	var _numExpedition : Int = 0;
 	public var NumExpedition(get, never):Int;
 	function get_NumExpedition() return _numExpedition;
 

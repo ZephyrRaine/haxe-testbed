@@ -135,7 +135,7 @@ class Building extends Entity {
     }
 
     public function getDisplayName() : String {
-        return display_name == "Ship" ? "Ship" : (building_level==0?"???":display_name + " - lvl. " + (isMaxLevel()?"max":Std.string(building_level)));
+        return display_name == "Ship" ? "Ship" : (building_level==0?"???":display_name + " - lvl. " + (isMaxLevel()?"max":Std.string(building_level)) + " /!\\ ");
     }
 
     public function upgrade()
