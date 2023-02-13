@@ -34,6 +34,10 @@ class GameManager extends Game {
 
 	_gold = v;
 	updateHUD(Gold);
+	for(b in en.Building.ALL)
+	{
+			b.displayCanBuy();
+	}
 	return _gold;
 	}
 

@@ -10,7 +10,7 @@ import h2d.TileGroup;
 class Building extends Entity {
 
 	public static var ALL : Array<Building> = [];
-    
+
     var display_name : String;
     var description : String;
     var building_level : Int;
@@ -25,7 +25,7 @@ class Building extends Entity {
     var fontBuilding : h2d.Font = hxd.Res.fonts.FutilePro.toFont();
     var bg : Bitmap;
 
-    var upgradeSound = hxd.Res.sounds.sfx.Building_Upgrade;
+    var canBuy : h2d.Text;
 
     function isMaxLevel() : Bool
     {
@@ -43,6 +43,12 @@ class Building extends Entity {
         set_hei(b.height);
         display_name = b.f_DisplayName;
         fuckingType = ANALYZER;
+
+        canBuy = new h2d.Text(Assets.titleFont);
+        canBuy.text = "/!\\";
+        canBuy.textColor = Col.red();
+        game.scroller.add(canBuy, Const.DP_UI);
+
         switch(b.f_BUILDING_TYPE)
         {
             case "AP" : fuckingType = AP; merchantAI = new en.Merchant(Assets.merchant, 0.4, cx, cy, 3);
@@ -72,7 +78,11 @@ class Building extends Entity {
         
         bg.visible = false;
 
+        canBuy.setPosition(Std.int((cx+xr)*Const.GRID - 10), Std.int((cy-1+yr)*Const.GRID -label.textHeight-4));
+
         updateLevelInfo();
+
+        displayCanBuy();
 
         game.scroller.add(bg, Const.DP_UI);
     }
@@ -99,6 +109,7 @@ class Building extends Entity {
     {
         super.postUpdate();
         label.parent.setPosition( Std.int((cx+xr)*Const.GRID -label.textWidth*0.5), ((cy-1+yr)*Const.GRID -label.textHeight-3 - 2*Math.sin(game.stime*3))); 
+        canBuy.alpha = (Math.sin(game.stime*5)+1)*0.5;
     }
 
     public function showLabel(show:Bool)
@@ -135,7 +146,7 @@ class Building extends Entity {
     }
 
     public function getDisplayName() : String {
-        return display_name == "Ship" ? "Ship" : (building_level==0?"???":display_name + " - lvl. " + (isMaxLevel()?"max":Std.string(building_level)) + " /!\\ ");
+        return display_name == "Ship" ? "Ship" : (building_level==0?"???":display_name + " - lvl. " + (isMaxLevel()?"max":Std.string(building_level)));
     }
 
     public function upgrade()
@@ -144,15 +155,27 @@ class Building extends Entity {
             return;
 
         var nextCost = building_costs[building_level];
-        cast(game,GameManager).addPermanentGold(-nextCost);
         building_level++;
         
         cast(game,GameManager).buildingsLevel[fuckingType] = building_level;
 
+        cast(game,GameManager).addPermanentGold(-nextCost);
+
         updateLevelInfo();
 
-        upgradeSound.stop();
-        upgradeSound.play(false, 1.0);
+        hxd.Res.sounds.sfx.Building_Upgrade.play(false, 1.0);
         fx.dotsExplosionCustom(centerX, centerY, 0xffcc00);
+    }
+
+	public function displayCanBuy() 
+    {
+        if(building_level < building_costs.length && cast(game, GameManager).Gold >= building_costs[building_level])
+        {
+            canBuy.visible = true;
+        }
+        else 
+        {
+                canBuy.visible = false;
+        }
     }
 }
