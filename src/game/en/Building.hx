@@ -121,6 +121,7 @@ class Building extends Entity {
     override function dispose() {
 		super.dispose();
         label.parent.remove();
+        canBuy.remove();
 		ALL.remove(this);
 	}
 
@@ -169,6 +170,13 @@ class Building extends Entity {
 
 	public function displayCanBuy() 
     {
+        if(display_name == "Ship")
+            {
+                canBuy.visible = false;
+                return;
+            }
+
+
         if(building_level < building_costs.length && cast(game, GameManager).Gold >= building_costs[building_level])
         {
             canBuy.visible = true;

@@ -1,5 +1,6 @@
 package ui;
 
+import sample.GameManager;
 import PlanetState.InspectorPayload;
 
 class PlanetInspectorWindow extends Window
@@ -125,7 +126,7 @@ class PlanetInspectorWindow extends Window
         action.text = "Digging...";
         BarValue = 0;
         var p = Game.ME.createChildProcess();
-        p.tw.createS(BarValue, 1, TEaseOut, Lib.rnd(2,5)).end(()->{
+        p.tw.createS(BarValue, 1, TEaseOut, Lib.rnd(2,3+(5-cast(Game.ME, GameManager).buildingsLevel[EXTRACTOR])*0.5)).end(()->{
             p.destroy();
             cb();
         });
