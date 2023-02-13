@@ -213,7 +213,7 @@ class PlanetExploration extends Entity{
 
     function updateTileInspector(cx:Int, cy:Int)
     {
-        var payload = planetState.inspectCase(cx, cy, gm.buildingsLevel[ANALYZER]);
+        var payload = planetState.inspectCase(cx, cy, gm.buildingsLevel[ANALYZER], gm.buildingsLevel[EXTRACTOR]);
         payload.action = (tile_statuses[cx][cy] == FOUILLED) ? 'Nothing left to do here' : payload.action;
 
         planetInspector.updateTile(payload);
@@ -302,7 +302,7 @@ class PlanetExploration extends Entity{
             {
                     canMove = true;
                     AP--;
-                    var str = planetState.digCase(cx,cy);
+                    var str = planetState.digCase(cx,cy,gm.buildingsLevel[EXTRACTOR]);
                     rewardModal(str, ()->{
                         tile_statuses[cx][cy] = FOUILLED;
                         mapTiles[cx][cy].spr.set('map_fouilled_$caseType');

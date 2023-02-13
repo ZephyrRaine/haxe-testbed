@@ -864,16 +864,16 @@
 									"id": "V_String",
 									"params": ["Extractor"]
 								}] },
-								{ "__identifier": "Cost", "__value": [125,125,125,125,125], "__type": "Array<Int>", "__tile": null, "defUid": 223, "realEditorValues": [
+								{ "__identifier": "Cost", "__value": [125,250,375,500,625], "__type": "Array<Int>", "__tile": null, "defUid": 223, "realEditorValues": [
 									{ "id": "V_Int", "params": [125] },
-									{ "id": "V_Int", "params": [125] },
-									{ "id": "V_Int", "params": [125] },
-									{ "id": "V_Int", "params": [125] },
-									{ "id": "V_Int", "params": [125] }
+									{ "id": "V_Int", "params": [250] },
+									{ "id": "V_Int", "params": [375] },
+									{ "id": "V_Int", "params": [500] },
+									{ "id": "V_Int", "params": [625] }
 								] },
-								{ "__identifier": "Description", "__value": "Keep some of your gold when you run out of AP.", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
+								{ "__identifier": "Description", "__value": "Extract more gold during your expeditions", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
 									"id": "V_String",
-									"params": ["Keep some of your gold when you run out of AP."]
+									"params": ["Extract more gold during your expeditions"]
 								}] },
 								{ "__identifier": "BUILDING_TYPE", "__value": "EXTRACTOR", "__type": "String", "__tile": null, "defUid": 228, "realEditorValues": [{
 									"id": "V_String",
@@ -909,9 +909,9 @@
 									{ "id": "V_Int", "params": [500] },
 									{ "id": "V_Int", "params": [1000] }
 								] },
-								{ "__identifier": "Description", "__value": "Increase your APs.", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
+								{ "__identifier": "Description", "__value": "Increase your Action Points", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
 									"id": "V_String",
-									"params": ["Increase your APs."]
+									"params": ["Increase your Action Points"]
 								}] },
 								{ "__identifier": "BUILDING_TYPE", "__value": "AP", "__type": "String", "__tile": null, "defUid": 228, "realEditorValues": [{
 									"id": "V_String",
@@ -941,9 +941,9 @@
 									"params": ["Scope"]
 								}] },
 								{ "__identifier": "Cost", "__value": [70,300], "__type": "Array<Int>", "__tile": null, "defUid": 223, "realEditorValues": [ { "id": "V_Int", "params": [70] }, { "id": "V_Int", "params": [300] } ] },
-								{ "__identifier": "Description", "__value": "Expand your field of vision.", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
+								{ "__identifier": "Description", "__value": "Expand your field of vision", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
 									"id": "V_String",
-									"params": ["Expand your field of vision."]
+									"params": ["Expand your field of vision"]
 								}] },
 								{ "__identifier": "BUILDING_TYPE", "__value": "SCOPE", "__type": "String", "__tile": null, "defUid": 228, "realEditorValues": [{
 									"id": "V_String",
@@ -973,9 +973,9 @@
 									"params": ["Analyzer"]
 								}] },
 								{ "__identifier": "Cost", "__value": [200,200,100,100], "__type": "Array<Int>", "__tile": null, "defUid": 223, "realEditorValues": [ { "id": "V_Int", "params": [200] }, { "id": "V_Int", "params": [200] }, { "id": "V_Int", "params": [100] }, { "id": "V_Int", "params": [100] } ] },
-								{ "__identifier": "Description", "__value": "Obtaining information from the field.", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
+								{ "__identifier": "Description", "__value": "Obtain information from the field", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
 									"id": "V_String",
-									"params": ["Obtaining information from the field."]
+									"params": ["Obtain information from the field"]
 								}] },
 								{ "__identifier": "BUILDING_TYPE", "__value": "ANALYZER", "__type": "String", "__tile": null, "defUid": 228, "realEditorValues": [{
 									"id": "V_String",
@@ -1005,9 +1005,9 @@
 									"params": ["Radar"]
 								}] },
 								{ "__identifier": "Cost", "__value": [500], "__type": "Array<Int>", "__tile": null, "defUid": 223, "realEditorValues": [{ "id": "V_Int", "params": [500] }] },
-								{ "__identifier": "Description", "__value": "Locate the hidden point of interest.", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
+								{ "__identifier": "Description", "__value": "Reveal areas of interest", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
 									"id": "V_String",
-									"params": ["Locate the hidden point of interest."]
+									"params": ["Reveal areas of interest"]
 								}] },
 								{ "__identifier": "BUILDING_TYPE", "__value": "RADAR", "__type": "String", "__tile": null, "defUid": 228, "realEditorValues": [{
 									"id": "V_String",

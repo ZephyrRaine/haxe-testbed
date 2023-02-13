@@ -38,9 +38,12 @@ class PlanetState
         
     public inline function getTileType(cx:Int,cy:Int) : TILE_TYPE return planetGrid[cx][cy];
 
-    public function digCase(cx:Int, cy:Int) : String
+    public function digCase(cx:Int, cy:Int, extractorLevel:Int) : String
     {
         var goldEarn = interestPoints[planetGrid[cx][cy]].GetRandomEarn(rand);
+        if(goldEarn > 0){
+            goldEarn = Std.int(goldEarn*(1.0+extractorLevel*0.4));
+        }
         var apEarn = interestPoints[planetGrid[cx][cy]].GetRandomAP(rand);
         
         if(!cast(Game.ME, GameManager).FirstCaseDigged && goldEarn < 64)
@@ -81,7 +84,7 @@ class PlanetState
         return log;
     }
 
-    public function inspectCase(cx:Int, cy:Int, analyzerLevel:Int) : InspectorPayload
+    public function inspectCase(cx:Int, cy:Int, analyzerLevel:Int, extractorLevel:Int) : InspectorPayload
     {
         var ip :InspectorPayload = {title:"",description:"",action: "",analyzer: ""};
         var caseType = planetGrid[cx][cy];
@@ -115,7 +118,7 @@ class PlanetState
                 ip.title = "Corpsed";
                 ip.description = "Kinda horrible";
         }
-        ip.analyzer = interestPoints[caseType].GetAnalyzerInfos(analyzerLevel);
+        ip.analyzer = interestPoints[caseType].GetAnalyzerInfos(analyzerLevel, extractorLevel);
 
         return ip;
     }
@@ -309,14 +312,14 @@ private class InterestPoint
         this.numPA = numPA;
     }
 
-    public function GetAnalyzerInfos(analyzerLevel : Int) : String
+    public function GetAnalyzerInfos(analyzerLevel : Int, extractorLevel : Int) : String
     {
         var analyzerInfos = "";
         if(analyzerLevel <= 0)
             return analyzerInfos;
         
         var goldChance = analyzerLevel >= 1 ? '$chanceEarn%' : "???";
-        var goldRange = analyzerLevel >= 3 ? '${minEarn}g- ${maxEarn}g' : "??g - ??g";
+        var goldRange = analyzerLevel >= 3 ? '${minEarn*(1.0+extractorLevel*0.4)}g- ${maxEarn*(1.0+extractorLevel*0.4)}g' : "??g - ??g";
         var apChance = analyzerLevel >= 2 ? '$chancePA%' : "???";
         var apRange = analyzerLevel >= 4 ? '$numPA AP' : "?? AP";
 
