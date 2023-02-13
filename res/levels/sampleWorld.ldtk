@@ -871,9 +871,9 @@
 									{ "id": "V_Int", "params": [500] },
 									{ "id": "V_Int", "params": [625] }
 								] },
-								{ "__identifier": "Description", "__value": "Extract more gold during your expeditions", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
+								{ "__identifier": "Description", "__value": "Extract more gold during your expeditions\nSave some gold even if you die", "__type": "String", "__tile": null, "defUid": 224, "realEditorValues": [{
 									"id": "V_String",
-									"params": ["Extract more gold during your expeditions"]
+									"params": ["Extract more gold during your expeditions\\nSave some gold even if you die"]
 								}] },
 								{ "__identifier": "BUILDING_TYPE", "__value": "EXTRACTOR", "__type": "String", "__tile": null, "defUid": 228, "realEditorValues": [{
 									"id": "V_String",
