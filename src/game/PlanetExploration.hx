@@ -343,6 +343,10 @@ class PlanetExploration extends Entity{
             Gold = Std.int(Gold * (gm.buildingsLevel[EXTRACTOR] * 0.1));
 
         gm.addPermanentGold(Gold);
+        if(Gold > 0)
+        {   
+            Leaderboard.PushScore(Gold);
+        }
         m.addTitle(lost?"FAILURE":"SUCCESS");
         m.addSpacer();
         m.addTitle('You\'re coming home with ${Gold}g');
