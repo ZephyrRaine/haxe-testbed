@@ -1,3 +1,4 @@
+import sdl.GL.Program;
 import ui.PlanetProcess;
 import ui.win.Menu;
 import PlanetState.TILE_TYPE;
@@ -174,6 +175,22 @@ class PlanetExploration extends Entity{
     var nf_cx:Int =0;
     var nf_cy:Int = 0;
 
+    var isMoving:Bool = false;
+
+    var moveDelay:Float = 85;
+    var moveTimer:Float = 0;
+    var startX:Float;
+    var startY:Float;
+    var targetX:Float;
+    var targetY:Float;
+    var tcx:Int;
+    var tcy:Int;
+
+    function easeOutBack(x: Float): Float {
+        return Math.sqrt(1 - Math.pow(x - 1, 2));
+        }
+        
+
     override function preUpdate() 
     {
         super.preUpdate();
@@ -181,7 +198,35 @@ class PlanetExploration extends Entity{
         wantedX = 0;
         wantedY = 0;
 
-        if(!canMove)
+        if(isMoving)
+        {
+            moveTimer += tmod;
+            var r = moveTimer/moveDelay;
+            if(r >= 1.0)
+            {
+              
+                isMoving = false;
+                moveTimer = 0;
+
+                playerEntity.setPosCase(tcx,tcy);
+                AP--;
+                revealTiles(tcx, tcy, gm.buildingsLevel[SCOPE]);
+        
+                updateTileInspector(tcx, tcy);
+                
+                //PRE-SHOT FUCKING FRAME BULLSHIT
+                nf_cx=tcx;
+                nf_cy=tcy;
+            }
+            else
+            {
+                var er = easeOutBack(r);
+                playerEntity.setPosPixel(M.lerp(startX, targetX, er), M.lerp(startY, targetY, er));
+            }    
+
+        }
+
+        if(!canMove || isMoving)
             return;
 
         if(ca.isPressed(MoveUp))
@@ -206,6 +251,13 @@ class PlanetExploration extends Entity{
         {
             moveSound.stop();
             moveSound.play(false, 0.4);
+            isMoving = true;
+
+            startX = playerEntity.cx*Const.GRID+playerEntity.xr*Const.GRID;
+            startY = playerEntity.cy*Const.GRID+playerEntity.yr*Const.GRID;
+            targetX = (playerEntity.cx + wantedX)*Const.GRID+playerEntity.xr*Const.GRID;
+            targetY = (playerEntity.cy + wantedY)*Const.GRID+playerEntity.yr*Const.GRID;
+            moveTimer = 0;
         }
         playerEntity.spr.alpha = (Math.sin(game.stime*10)+1)*0.5*0.5+0.25;
         checkEndRun(nf_cx, nf_cy);
@@ -225,15 +277,8 @@ class PlanetExploration extends Entity{
         if(!canMove)
             return false;
 
-        playerEntity.setPosCase(ncx,ncy);
-        AP--;
-        revealTiles(ncx, ncy, gm.buildingsLevel[SCOPE]);
-
-        updateTileInspector(ncx, ncy);
-        
-        //PRE-SHOT FUCKING FRAME BULLSHIT
-        nf_cx=ncx;
-        nf_cy=ncy;
+        tcx=ncx;
+        tcy=ncy;
 
         return true;
     }
