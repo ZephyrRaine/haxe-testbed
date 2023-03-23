@@ -1,4 +1,3 @@
-import sdl.GL.Program;
 import ui.PlanetProcess;
 import ui.win.Menu;
 import PlanetState.TILE_TYPE;
@@ -177,7 +176,7 @@ class PlanetExploration extends Entity{
 
     var isMoving:Bool = false;
 
-    var moveDelay:Float = 85;
+    var moveDelay:Float = 35;
     var moveTimer:Float = 0;
     var startX:Float;
     var startY:Float;
